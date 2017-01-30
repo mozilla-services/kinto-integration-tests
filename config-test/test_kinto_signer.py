@@ -47,6 +47,9 @@ def test_addons_signatures(env, conf):
     )
     try:
         collection, records, timestamp = get_collection_data(client)
+        if len(records) == 0:
+            pytest.skip('blocklists/addons has no records')
+            
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
@@ -64,6 +67,9 @@ def test_plugins_signatures(env, conf):
     )
     try:
         collection, records, timestamp = get_collection_data(client)
+        if len(records) == 0:
+            pytest.skip('blocklists/plugins has no records')
+
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
@@ -81,6 +87,9 @@ def test_gfx_signatures(env, conf):
     )
     try:
         collection, records, timestamp = get_collection_data(client)
+        if len(records) == 0:
+            pytest.skip('blocklists/gfx contains no records')
+
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
@@ -98,6 +107,9 @@ def test_certificates_signatures(env, conf):
     )
     try:
         collection, records, timestamp = get_collection_data(client)
+        if len(records) == 0:
+            pytest.skip('No records in blocklists/certifications')
+
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
@@ -115,6 +127,9 @@ def test_certificate_pinning_signatures(env, conf):
     )
     try:
         collection, records, timestamp = get_collection_data(client)
+        if len(records) == 0:
+            pytest.skip('No records in pinning/pins')
+
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'pinningpreload_key')
     except KintoException as e:
