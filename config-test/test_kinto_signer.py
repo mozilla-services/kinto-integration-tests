@@ -1,4 +1,4 @@
-import ConfigParser
+import configparser
 import pytest
 from kinto_signer.serializer import canonical_json
 from kinto_signer.signer.local_ecdsa import ECDSASigner
@@ -8,7 +8,7 @@ from pytest_testrail.plugin import testrail
 
 @pytest.fixture
 def conf():
-    config = ConfigParser.ConfigParser()
+    config = configparser.ConfigParser()
     config.read('manifest.ini')
     return config
 
@@ -26,7 +26,7 @@ def verify_signer_id(collection, key_name):
 
 def verify_signatures(collection, records, timestamp):
     try:
-        serialized = canonical_json(records, timestamp)
+        serialized = canonical_json(list(records), timestamp)
         signature = collection['data']['signature']
         with open('pub', 'w') as f:
             f.write(signature['public_key'])

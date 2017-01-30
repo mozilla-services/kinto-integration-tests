@@ -2,7 +2,7 @@
 Tests for the Kinto server fall into 3 categories:
 1. unit tests - located here: https://github.com/Kinto/kinto/tests
 2. loadtests - located here:  https://github.com/Kinto/kinto-loadtests
-3. integration tests - this repo
+3. configuration check tests - located in this repo
 
 This repo is a clearinghouse for all automated tests that don't need to reside in their own repository.
 They would include a variety of test types that usually fall in the middle of the test pyramid:
@@ -12,41 +12,17 @@ These tests can all be run at a go using the "run" file or executed via a Docker
 
 ###General Configuration###
 
+Python 3.5.2 or greater is required.
+
 It's highly recommended to use [Virtualenv](https://virtualenv.pypa.io/en/latest/)
 in order to have an isolated environment.
 
-From /kinto/
+From this directory
 
-1. virtualenv .
+1. virtualenv . -p /path/to/python
 2. ./bin/pip install -r dev-requirements.txt
 
-NOTE -- as of 01/14/2016 we are relying on a specific branch of the [Kinto Python client](https://github.com/Kinto/kinto.py)
-that implements the replication features. When the pull request containing that
-code gets merged into the master branch the dev-requirements.txt file will be
-updated.
-
 #Run Tests#
-
-###API tests###
-
-1. Decide if you want to run your own local instance of [Kinto server](https://github.com/Kinto/kinto) or if you wish to use the version on the staging server that it is currently pointing at
-2. If you decide to run your own instance make sure modify *api-test/mockclient.py* and change *server_url* to point at the correct Kinto server
-4. Run the tests using _./bin/py.test api-test/_
-
-###Integration Tests###
-
-The integration tests were developed using Docker version 1.9.1, build a34a1d5 and
-Docker Compose version 1.5.1.
-
-1. Make sure that you have [Docker](https://www.docker.com/) installed on the system you are running the tests on
-2. Start your master and read-only containers using _docker-compose up_
-3. Run the tests using _./bin/py.test integration-test/_
-
-###Configuration Tests###
-
-The configuration tests are designed to ensure parts of Kinto that are
-used by other applications are working correctly. These tests will report results
-to TestRail.
 
 
 #TestRail Integration#
@@ -75,6 +51,11 @@ To run the tests, do the following
 2. Make sure you are connected to the Mozilla VPN
 3. Run the tests using _py.test --env=<ENVIRONMENT> --testrail=config-check-test/testrail.cfg config-check-test/_ where <ENVIRONMENT> is _stage_ or _prod_
 
+If you get an error message similar to:
+
+_INTERNALERROR> requests.exceptions.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:645)_
+
+then add _--no-ssl-cert-check_ as a parameter to the command used in step 3.
+
 These configuration check tests are currently only being run against staging
 instances of Kinto.
-
