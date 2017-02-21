@@ -1,7 +1,10 @@
 import configparser
 import pytest
+import uuid
 from fxa.__main__ import DEFAULT_CLIENT_ID
+from fxa.core import Client as FxaClient
 from fxa.plugins.requests import FxABearerTokenAuth
+from fxa.tests.utils import TestEmailAccount
 from kinto_http import Client
 
 
@@ -14,8 +17,17 @@ def conf():
 
 def test_add_content(env, conf):
     # Grab a bearer token that we can use to talk to the webextensions endpoint
-    email = conf.get(env, 'fxa_user_email')
-    passwd = conf.get(env, 'fxa_user_password')
+    acct = TestEmailAccount()
+    email = acct.email
+    passwd = str(uuid.uuid4())
+    fxaclient = FxaClient("https://api.accounts.firefox.com")
+    session = fxaclient.create_account(email, passwd)
+    m = acct.wait_for_email(lambda m: "x-verify-code" in m["headers"])
+
+    if m is None:
+        raise RuntimeErrors("Verification email did not arrive")
+
+    session.verify_email_code(m["headers"]["x-verify-code"])
     auth = FxABearerTokenAuth(
         email,
         passwd,
@@ -24,26 +36,16 @@ def test_add_content(env, conf):
         account_server_url=conf.get(env, 'account_server_url'),
         oauth_server_url=conf.get(env, 'oauth_server_url'),
     )
-    client = Client(
-        server_url=conf.get(env, 'we_server_url'),
-        auth=auth
-    )
-
-    # First, we need to have one more more collections
-    collections = client.get_collections('default')
-    assert len(collections) > 0
+    client = Client(server_url=conf.get(env, 'we_server_url'), auth=auth)
 
     # Add a record to our QA collection and make sure we have N+1 records
-    existing_records = client.get_records(conf.get(env, 'qa_collection'), 'default')
-    assert len(existing_records) > 0
+    existing_records = client.get_records(collection=conf.get(env, 'qa_collection'), bucket='default')
+    assert len(existing_records) == 0
+
     data = {"payload": {"encrypted": "SmluZ28gdGVzdA=="}}
-    resp = client.create_record(
-        data,
-        collection=conf.get(env, 'qa_collection'),
-        bucket='default',
-    )
+    resp = client.create_record(data, collection=conf.get(env, 'qa_collection'), bucket='default')
     new_record_id = resp['data']['id']
-    updated_records = client.get_records(conf.get(env, 'qa_collection'), 'default')
+    updated_records = client.get_records(collection=conf.get(env, 'qa_collection'), bucket='default')
     assert len(updated_records) == len(existing_records) + 1
 
     client.delete_record(
@@ -51,7 +53,12 @@ def test_add_content(env, conf):
         collection=conf.get(env, 'qa_collection'),
         bucket='default'
     )
-    updated_records = client.get_records(conf.get(env, 'qa_collection'), 'default')
+    updated_records = client.get_records(collection=conf.get(env, 'qa_collection'), bucket='default')
     assert len(updated_records) == len(existing_records)
+
+    # Clean up the account that we created for the test
+    acct.clear()
+    fxaclient.destroy_account(email, passwd)
+
 
 
