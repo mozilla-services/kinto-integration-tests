@@ -1,8 +1,7 @@
 #!/bin/bash
 
-cd ${WORKSPACE}/kinto
 virtualenv venv
-. ${WORKSPACE}/kinto/venv/bin/activate
+. ${WORKSPACE}/venv/bin/activate
 pip install -r dev-requirements.txt
 
 # config-test
