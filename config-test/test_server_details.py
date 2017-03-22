@@ -2,8 +2,6 @@ import configparser
 import pytest
 import requests
 
-from pytest_testrail.plugin import testrail
-
 
 @pytest.fixture
 def conf():
@@ -13,7 +11,7 @@ def conf():
 
 
 def test_version(conf, env):
-    response = requests.get(conf.get(env, 'server') + '/__version__')
+    response = requests.get(conf.get(env, 'reader_server') + '/__version__')
     data = response.json()
 
     expected_fields = {'version', 'source', 'name', 'build', 'commit'}
@@ -28,7 +26,7 @@ def test_version(conf, env):
 
 
 def test_heartbeat(conf, env):
-    response = requests.get(conf.get(env, 'server') + '/__heartbeat__')
+    response = requests.get(conf.get(env, 'reader_server') + '/__heartbeat__')
     data = response.json()
 
     expected_fields = {'permission', 'cache', 'storage'}
