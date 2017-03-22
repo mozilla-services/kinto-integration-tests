@@ -1,6 +1,6 @@
 #!/bin/bash
 
-virtualenv venv
+virtualenv --python=`which python3` venv
 venv/bin/pip install -r dev-requirements.txt
 
 # config-test
