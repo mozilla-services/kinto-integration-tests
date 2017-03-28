@@ -1,7 +1,2 @@
-#!/bin/bash
-
-virtualenv venv
-venv/bin/pip install -r dev-requirements.txt
-
-# config-test
-venv/bin/py.test --env=stage -v config-test/test_kinto_signer.py
+docker build -t kinto-integration-tests/dev:latest .
+docker run kinto-integration-tests/dev:latest
