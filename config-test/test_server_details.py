@@ -12,7 +12,7 @@ def conf():
 
 
 def test_version(conf, env):
-    response = requests.get(conf.get(env, 'reader_server') + '__version__')
+    response = requests.get(conf.get(env, 'reader_server') + '/__version__')
     data = response.json()
     expected_fields = conf.get(env, 'version_fields').split(', ')
 
@@ -26,7 +26,7 @@ def test_version(conf, env):
 
 
 def test_heartbeat(conf, env):
-    response = requests.get(conf.get(env, 'reader_server') + '__heartbeat__')
+    response = requests.get(conf.get(env, 'reader_server') + '/__heartbeat__')
     data = response.json()
 
     expected_fields = conf.get(env, 'heartbeat_fields').split(', ')
