@@ -1,4 +1,5 @@
 import configparser
+import json
 import pytest
 import requests
 
@@ -11,10 +12,9 @@ def conf():
 
 
 def test_version(conf, env):
-    response = requests.get(conf.get(env, 'reader_server') + '/__version__')
+    response = requests.get(conf.get(env, 'reader_server') + '__version__')
     data = response.json()
-
-    expected_fields = {'version', 'source', 'name', 'build', 'commit'}
+    expected_fields = conf.get(env, 'version_fields').split(', ')
 
     # First, make sure that data only contains fields we expect
     for key in data:
@@ -26,10 +26,10 @@ def test_version(conf, env):
 
 
 def test_heartbeat(conf, env):
-    response = requests.get(conf.get(env, 'reader_server') + '/__heartbeat__')
+    response = requests.get(conf.get(env, 'reader_server') + '__heartbeat__')
     data = response.json()
 
-    expected_fields = {'permission', 'cache', 'storage'}
+    expected_fields = conf.get(env, 'heartbeat_fields').split(', ')
 
     # First, make sure that data only contains fields we expect
     for key in data:
