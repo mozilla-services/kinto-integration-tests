@@ -41,7 +41,7 @@ def verify_signatures(collection, records, timestamp):
 @testrail('C7107')
 def test_addons_signatures(env, conf):
     client = Client(
-        server_url=conf.get(env, 'server'),
+        server_url=conf.get(env, 'reader_server'),
         bucket='blocklists',
         collection='addons'
     )
@@ -61,7 +61,7 @@ def test_addons_signatures(env, conf):
 @testrail('C7104')
 def test_plugins_signatures(env, conf):
     client = Client(
-        server_url=conf.get(env, 'server'),
+        server_url=conf.get(env, 'reader_server'),
         bucket='blocklists',
         collection='plugins'
     )
@@ -81,7 +81,7 @@ def test_plugins_signatures(env, conf):
 @testrail('C7105')
 def test_gfx_signatures(env, conf):
     client = Client(
-        server_url=conf.get(env, 'server'),
+        server_url=conf.get(env, 'reader_server'),
         bucket='blocklists',
         collection='gfx'
     )
@@ -101,7 +101,7 @@ def test_gfx_signatures(env, conf):
 @testrail('C7106')
 def test_certificates_signatures(env, conf):
     client = Client(
-        server_url=conf.get(env, 'server'),
+        server_url=conf.get(env, 'reader_server'),
         bucket='blocklists',
         collection='certificates'
     )
@@ -121,7 +121,7 @@ def test_certificates_signatures(env, conf):
 @testrail('C10491')
 def test_certificate_pinning_signatures(env, conf):
     client = Client(
-        server_url=conf.get(env, 'server'),
+        server_url=conf.get(env, 'reader_server'),
         bucket='pinning',
         collection='pins'
     )
