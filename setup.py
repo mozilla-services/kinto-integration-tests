@@ -5,4 +5,5 @@ setup(name='fxtesteng',
       author='Chris Hartjes',
       author_email='chartjes@mozilla.com',
       version='1.0',
-      py_modules=['helpers'])
+      packages=['fxtesteng']
+)
