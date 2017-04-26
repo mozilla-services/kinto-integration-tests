@@ -1,8 +1,8 @@
 import configparser
-import json
 import pytest
 import requests
 
+from fxtesteng.helpers import aslist
 
 @pytest.fixture
 def conf():
@@ -12,9 +12,9 @@ def conf():
 
 
 def test_version(conf, env):
-    response = requests.get(conf.get(env, 'reader_server') + '/__version__')
+    response = requests.get(conf.get(env, 'reader_server').rstrip('/') + '/__version__')
     data = response.json()
-    expected_fields = conf.get(env, 'version_fields').split(', ')
+    expected_fields = aslist(conf.get(env, 'version_fields'))
 
     # First, make sure that data only contains fields we expect
     for key in data:
@@ -26,10 +26,10 @@ def test_version(conf, env):
 
 
 def test_heartbeat(conf, env):
-    response = requests.get(conf.get(env, 'reader_server') + '/__heartbeat__')
+    response = requests.get(conf.get(env, 'reader_server').rstrip('/') + '/__heartbeat__')
     data = response.json()
 
-    expected_fields = conf.get(env, 'heartbeat_fields').split(', ')
+    expected_fields = aslist(conf.get(env, 'heartbeat_fields'))
 
     # First, make sure that data only contains fields we expect
     for key in data:
