@@ -3,6 +3,7 @@ import configparser
 import pytest
 from smwogger import API
 
+from fxtesteng.helpers import aslist
 
 @pytest.fixture(scope="module")
 def conf():
@@ -25,7 +26,7 @@ def api(event_loop, conf, env):
 async def test_version(api):
     res = await api.__version__()
     data = await res.json()
-    expected_fields = ['version', 'source', 'name', 'build', 'commit']
+    expected_fields = aslist(conf.get(env, 'version_fields'))
 
     # First, make sure that data only contains fields we expect
     for key in data:
@@ -40,7 +41,7 @@ async def test_version(api):
 async def test_heartbeat(api):
     res = await api.__heartbeat__()
     data = await res.json()
-    expected_fields = ['permission', 'cache', 'storage']
+    expected_fields = aslist(conf.get(env, 'heartbeat_fields'))
 
     # First, make sure that data only contains fields we expect
     for key in data:
