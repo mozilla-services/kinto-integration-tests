@@ -16,6 +16,6 @@ def pytest_addoption(parser):
     )
 
 
-@pytest.fixture
+@pytest.fixture(scope="module")
 def env(request):
     return request.config.getoption("--env")
