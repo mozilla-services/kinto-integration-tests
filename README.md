@@ -1,5 +1,6 @@
-#Summary#
+# Summary
 Tests for the Kinto server fall into 3 categories:
+
 1. unit tests - located here: https://github.com/Kinto/kinto/tests
 2. loadtests - located here:  https://github.com/Kinto/kinto-loadtests
 3. configuration check tests - located in this repo
@@ -10,7 +11,7 @@ API tests, config and URL checks, deployment tests, end-2-end tests, security te
 
 These tests can all be run at a go using the "run" file or executed via a Docker container.
 
-###General Configuration###
+### General Configuration
 
 Python 3.5.2 or greater is required.
 
@@ -23,11 +24,12 @@ From this directory
 2. ./bin/pip install -r dev-requirements.txt
 
 
-#Run Tests#
+# Run Tests
 
 
-#TestRail Integration#
-####Creating TestRail-aware Tests####
+# TestRail Integration
+
+#### Creating TestRail-aware Tests
 
 Tests that you want to report results to TestRail need to make sure that they
 are importing the TestRail py.test plugin:
@@ -44,19 +46,26 @@ which can be obtained via the TestRail admin. Without the decorator the test
 will still run but no results will be reported to TestRail.
 
 
-####Running The Tests####
+#### Running The Tests
 
-To run the tests, do the following
+To run the tests wihtout reporting results to TestRail, use the following command:
+
+_py.test -v --env=ENVIRONMENT config-check-test/_
+
+where _ENVIRONMENT_ is one of environments listed in _manifest.ini_, which are currently:
+
+* stage
+* settings-prod
+* settings-stage
+
+To run tests and report them to TestRail, do the following:
 
 1. Copy _config-check-test/testrail.cfg-dist_ to _config-check-test/testrail.cfg_ and add your TestRail user name and password to the configuration file
 2. Make sure you are connected to the Mozilla VPN
-3. Run the tests using _py.test --env=<ENVIRONMENT> --testrail=config-check-test/testrail.cfg config-check-test/_ where <ENVIRONMENT> is _stage_ or _prod_
+3. Run the tests using _py.test --env=ENVIRONMENT --testrail=config-check-test/testrail.cfg config-check-test/_ where ENVIRONMENT is one of the values listed in the _manifest.ini_ file
 
 If you get an error message similar to:
 
 _INTERNALERROR> requests.exceptions.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:645)_
 
 then add _--no-ssl-cert-check_ as a parameter to the command used in step 3.
-
-These configuration check tests are currently only being run against staging
-instances of Kinto.
