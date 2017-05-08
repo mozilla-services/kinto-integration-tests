@@ -48,7 +48,7 @@ will still run but no results will be reported to TestRail.
 
 #### Running The Tests
 
-To run the tests wihtout reporting results to TestRail, use the following command:
+To run the tests without reporting results to TestRail, use the following command:
 
 _py.test -v --env=ENVIRONMENT config-check-test/_
 
