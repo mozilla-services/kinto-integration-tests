@@ -1,2 +1,1 @@
-docker build -t kinto-integration-tests/dev:latest .
-docker run kinto-integration-tests/dev:latest
+docker run firefoxtesteng/kinto-integration-tests:latest
