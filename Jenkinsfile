@@ -13,7 +13,7 @@ pipeline {
   stages {
     stage('Test') {
       steps {
-        sh "run"
+        sh "${WORKSPACE}/run"
       }
     }
   }
