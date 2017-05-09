@@ -1,1 +1,9 @@
-docker run firefoxtesteng/kinto-integration-tests:latest
+#!/bin/bash
+
+# project.test_type.test_env
+# ${JOB_NAME} is a Jenkins var
+
+
+IFS="." read -ra array <<< "${JOB_NAME}"
+TEST_ENV=${array[2]}
+docker run -e TEST_ENV=$(TEST_ENV) firefoxtesteng/kinto-integration-tests:latest
