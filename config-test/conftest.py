@@ -14,8 +14,18 @@ def pytest_addoption(parser):
         default="stage",
         help="Environment tests are running in: stage or prod"
     )
+    parser.addoption(
+        "--api-version",
+        dest="apiversion",
+        help="Version of Kinto API we are testing against"
+    )
 
 
 @pytest.fixture(scope="module")
 def env(request):
     return request.config.getoption("--env")
+
+
+@pytest.fixture(scope="module")
+def apiversion(request):
+    return request.config.getoption("--api-version")
