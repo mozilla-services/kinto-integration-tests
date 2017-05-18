@@ -5,6 +5,7 @@ from smwogger import API
 
 from fxtesteng.helpers import aslist
 
+
 @pytest.fixture(scope="module")
 def conf():
     config = configparser.ConfigParser()
@@ -23,7 +24,7 @@ def api(event_loop, conf, env):
 
 
 @pytest.mark.asyncio
-async def test_version(api):
+async def test_version(api, env, apiversion):
     res = await api.__version__()
     data = await res.json()
     expected_fields = aslist(conf.get(env, 'version_fields'))
@@ -36,9 +37,13 @@ async def test_version(api):
     for field in expected_fields:
         assert field in data
 
+    # If we're passed an API version via the CLI, verify it matches
+    if apiversion:
+        assert apiversion == data['version']
+
 
 @pytest.mark.asyncio
-async def test_heartbeat(api):
+async def test_heartbeat(api, env):
     res = await api.__heartbeat__()
     data = await res.json()
     expected_fields = aslist(conf.get(env, 'heartbeat_fields'))
