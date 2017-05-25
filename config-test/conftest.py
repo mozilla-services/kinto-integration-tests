@@ -15,7 +15,18 @@ def pytest_addoption(parser):
         help="Environment tests are running in: stage or prod"
     )
 
+    parser.addoption(
+        "--api-version",
+        dest="apiversion",
+        help="Optional param: version of API under test"
+    )
+
 
 @pytest.fixture(scope="module")
 def env(request):
     return request.config.getoption("--env")
+
+
+@pytest.fixture(scope="module")
+def apiversion(request):
+    return request.config.getoption("--api-version")

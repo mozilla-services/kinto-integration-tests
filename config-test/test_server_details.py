@@ -24,7 +24,7 @@ def api(event_loop, conf, env):
 
 
 @pytest.mark.asyncio
-async def test_version(api, env, apiversion):
+async def test_version(api, conf, env, apiversion):
     res = await api.__version__()
     data = await res.json()
     expected_fields = aslist(conf.get(env, 'version_fields'))
@@ -43,7 +43,7 @@ async def test_version(api, env, apiversion):
 
 
 @pytest.mark.asyncio
-async def test_heartbeat(api, env):
+async def test_heartbeat(api, conf, env):
     res = await api.__heartbeat__()
     data = await res.json()
     expected_fields = aslist(conf.get(env, 'heartbeat_fields'))
