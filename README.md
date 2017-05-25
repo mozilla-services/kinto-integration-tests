@@ -23,7 +23,6 @@ These are the minimum requirements:
 
 #### Running The Tests
 
-The tests expect that you have set an environment variable called TESTENV
 Tests are run using tox. First, we need to set an environment variable called TEST_ENV to be the environment we want our tests to run under. Check the documentation for your shell to determine how to do so. 
 
 * stage
