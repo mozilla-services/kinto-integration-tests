@@ -55,3 +55,39 @@ async def test_heartbeat(api, conf, env):
     # Then make the we only have the expected fields in the data
     for field in expected_fields:
         assert field in data
+
+
+@pytest.mark.asyncio
+async def test_server_info(api, conf, env):
+    res = await api.server_info()
+    data = await res.json()
+    expected_fields = aslist(conf.get(env, 'server_info_fields'))
+
+    for key in data:
+        assert key in expected_fields
+
+    for field in expected_fields:
+        assert field in data
+
+
+@pytest.mark.asyncio
+async def test_contribute(api, conf, env):
+    res = await api.contribute()
+    data = await res.json()
+    expected_fields = aslist(conf.get(env, 'contribute_fields'))
+
+    for key in data:
+        assert key in expected_fields
+
+    for field in expected_fields:
+        assert field in data
+
+
+@pytest.mark.asyncio
+async def test_get_changess(api, conf, env):
+    res = await api.get_changess()
+    data = await res.json()
+
+    for record in data['data']:
+        assert 'host' in record
+
