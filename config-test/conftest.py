@@ -20,6 +20,12 @@ def pytest_addoption(parser):
         help="Version of the API we are testing against"
     )
 
+    parser.addoption(
+        "--api-version",
+        dest="apiversion",
+        help="Optional param: version of API under test"
+    )
+
 
 @pytest.fixture(scope="module")
 def env(request):
@@ -29,4 +35,3 @@ def env(request):
 @pytest.fixture(scope="module")
 def apiversion(request):
     return request.config.getoption("--api-version")
-

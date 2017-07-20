@@ -13,59 +13,22 @@ These tests can all be run at a go using the "run" file or executed via a Docker
 
 ### General Configuration
 
-Python 3.5.2 or greater is required.
+These are the minimum requirements:
 
-It's highly recommended to use [Virtualenv](https://virtualenv.pypa.io/en/latest/)
-in order to have an isolated environment.
-
-From this directory
-
-1. virtualenv . -p /path/to/python
-2. ./bin/pip install -r dev-requirements.txt
+* Python 3.5.2 or greater
+* [Tox](https://tox.readthedocs.io/en/latest/)
 
 
-# Run Tests
-
-
-# TestRail Integration
-
-#### Creating TestRail-aware Tests
-
-Tests that you want to report results to TestRail need to make sure that they
-are importing the TestRail py.test plugin:
-
-_from pytest_testrail.plugin import testrail_
-
-Then you need to add a decorator to a test in order for the plugin to report
-the results of the test. Here'a sample:
-
-_@testrail('C5475')_
-
-The value 'C5475' is the ID that TestRail assigned to the case you are testing,
-which can be obtained via the TestRail admin. Without the decorator the test
-will still run but no results will be reported to TestRail.
-
+# Running Configuration Check Tests
 
 #### Running The Tests
 
-To run the tests without reporting results to TestRail, use the following command:
-
-_py.test -v --env=ENVIRONMENT config-check-test/_
-
-where _ENVIRONMENT_ is one of environments listed in _manifest.ini_, which are currently:
+Tests are run using tox. First, we need to set an environment variable called TEST_ENV to be the environment we want our tests to run under. Check the documentation for your shell to determine how to do so. 
 
 * stage
 * settings-prod
 * settings-stage
 
-To run tests and report them to TestRail, do the following:
+These match the environments listed in our _manifest.ini_ file.
 
-1. Copy _config-check-test/testrail.cfg-dist_ to _config-check-test/testrail.cfg_ and add your TestRail user name and password to the configuration file
-2. Make sure you are connected to the Mozilla VPN
-3. Run the tests using _py.test --env=ENVIRONMENT --testrail=config-check-test/testrail.cfg config-check-test/_ where ENVIRONMENT is one of the values listed in the _manifest.ini_ file
-
-If you get an error message similar to:
-
-_INTERNALERROR> requests.exceptions.SSLError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed (_ssl.c:645)_
-
-then add _--no-ssl-cert-check_ as a parameter to the command used in step 3.
+Then just use the command _tox_ to run the tests.

@@ -49,7 +49,7 @@ def test_addons_signatures(env, conf):
         collection, records, timestamp = get_collection_data(client)
         if len(records) == 0:
             pytest.skip('blocklists/addons has no records')
-            
+
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
