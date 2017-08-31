@@ -30,16 +30,17 @@ def test_fennec_dlc_exists(env, conf):
         m.update(response.content)
         assert record['attachment']['hash'] == m.hexdigest()
 
+
 def test_fonts_fingerprinting_defenses(env, conf):
-    r = requests.get(conf.get(env, 'fingerprinting_defenses'))
+    r = requests.get(conf.get(env, 'fingerprinting-defenses'))
     response = r.json()
 
     if 'error' in response:
-        pytest.skip('fingerprinting_defenses/fonts not accessible')
+        pytest.skip('fingerprinting-defenses/fonts not accessible')
 
     for record in response['data']:
-        assert 'properties' in record
-        assert 'platforms' in record['properties']
-        assert 'type' in record
-        assert record['type'] == 'object'
-
+        assert 'last_modified' in record
+        assert 'platforms' in record
+        assert 'schema' in record
+        assert 'filename' in record['attachment']
+        assert 'hash' in record['attachment']
