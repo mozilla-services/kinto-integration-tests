@@ -2,4 +2,4 @@
 
 
 def sb = new org.mozilla.fxtest.ServiceBook()
-sb.testProject('Kinto')
+sb.testProject('kinto')
