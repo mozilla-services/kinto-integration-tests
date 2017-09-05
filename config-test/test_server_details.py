@@ -90,4 +90,3 @@ async def test_get_changess(api, conf, env):
 
     for record in data['data']:
         assert 'host' in record
-
