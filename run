@@ -6,4 +6,5 @@
 
 IFS="." read -ra array <<< "${JOB_NAME}"
 TEST_ENV=${array[2]}
+docker pull firefoxtesteng/kinto-integration-tests:latest
 docker run -e TEST_ENV=$TEST_ENV firefoxtesteng/kinto-integration-tests:latest
