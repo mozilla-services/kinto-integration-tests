@@ -14,6 +14,11 @@ def pytest_addoption(parser):
         default="stage",
         help="Environment tests are running in: stage or prod"
     )
+    parser.addoption(
+        "--api-version",
+        dest="apiversion",
+        help="Version of the API we are testing against"
+    )
 
     parser.addoption(
         "--api-version",
