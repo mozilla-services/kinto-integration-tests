@@ -1,4 +1,4 @@
-@Library('fxtest@1.7') _
+@Library('fxtest@1.9') _
 
 
 def sb = new org.mozilla.fxtest.ServiceBook()
