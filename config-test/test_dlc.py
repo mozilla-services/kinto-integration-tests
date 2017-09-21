@@ -44,3 +44,18 @@ def test_fonts_fingerprinting_defenses(env, conf):
         assert 'schema' in record
         assert 'filename' in record['attachment']
         assert 'hash' in record['attachment']
+
+
+def test_fonts_fingerprinting_defenses_preview(env, conf):
+    r = requests.get(conf.get(env, 'fingerprinting-defenses-preview'))
+    response = r.json()
+
+    if 'error' in response:
+        pytest.skip('fingerprinting-defenses-preview/fonts not accessible')
+
+    for record in response['data']:
+        assert 'last_modified' in record
+        assert 'platforms' in record
+        assert 'schema' in record
+        assert 'filename' in record['attachment']
+        assert 'hash' in record['attachment']
