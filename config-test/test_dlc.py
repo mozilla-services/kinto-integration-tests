@@ -3,6 +3,8 @@ import hashlib
 import pytest
 import requests
 
+from pytest_testrail.plugin import testrail
+
 
 @pytest.fixture
 def conf():
@@ -11,6 +13,7 @@ def conf():
     return config
 
 
+@testrail('C81661')
 def test_fennec_dlc_exists(env, conf):
     r = requests.get(conf.get(env, 'font_collection'))
     response = r.json()
@@ -31,6 +34,7 @@ def test_fennec_dlc_exists(env, conf):
         assert record['attachment']['hash'] == m.hexdigest()
 
 
+@testrail('C81662')
 def test_fonts_fingerprinting_defenses(env, conf):
     r = requests.get(conf.get(env, 'fingerprinting-defenses'))
     response = r.json()
@@ -46,6 +50,7 @@ def test_fonts_fingerprinting_defenses(env, conf):
         assert 'hash' in record['attachment']
 
 
+@testrail('C81663')
 def test_fonts_fingerprinting_defenses_preview(env, conf):
     r = requests.get(conf.get(env, 'fingerprinting-defenses-preview'))
     response = r.json()
