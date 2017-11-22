@@ -25,9 +25,9 @@ These are the minimum requirements:
 
 Tests are run using tox. First, we need to set an environment variable called TEST_ENV to be the environment we want our tests to run under. Check the documentation for your shell to determine how to do so.
 
-* dev
-* prod
 * stage
+* settings-prod
+* settings-stage
 
 These match the environments listed in our _manifest.ini_ file.
 
