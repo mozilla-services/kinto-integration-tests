@@ -6,5 +6,5 @@
 
 IFS="." read -ra array <<< "${JOB_NAME}"
 TEST_ENV=${array[1]}
-docker pull firefoxtesteng/kinto-integration-tests:latest
-docker run --rm -e TEST_ENV=$TEST_ENV firefoxtesteng/kinto-integration-tests:latest
+flake8
+pytest --env=${TEST_ENV} config-test/
