@@ -11,24 +11,40 @@ API tests, config and URL checks, deployment tests, end-2-end tests, security te
 
 These tests can all be run at a go using the "run" file or executed via a Docker container.
 
-### General Configuration
+## General Configuration
 
 These are the minimum requirements:
 
 * Python 3.5.2 or greater
-* [Tox](https://tox.readthedocs.io/en/latest/)
+
+### Installing Dependencies via Virtualenv and Pip
+
+You can install all the dependencies for running these tests locally by installing:
+
+* pip (https://pip.readthedocs.io/en/stable/)
+* virtualenv (https://virtualenv.pypa.io/en/stable/)
+
+Please follow the instructions on how to install those tools and then do the following:
+
+* create a virtual environment using the minimum recommended version of Python
+* activate the virtual environment
+* install the required dependencies using `pip install -r requirements.txt`
 
 
-# Running Configuration Check Tests
+### Installing Dependencies via Pipenv
 
-#### Running The Tests
+Pipenv (https://docs.pipenv.org/) can also be used to install the required dependencies.
+Please consult the documentation for the project for instructions on installing it.
 
-Tests are run using tox. First, we need to set an environment variable called TEST_ENV to be the environment we want our tests to run under. Check the documentation for your shell to determine how to do so.
+Once you've installed Pipenv, you can do the following:
 
-* stage
-* settings-prod
-* settings-stage
+* create the virtual environment and install dependencies using `pipenv install`
+* activate the virtual environment using `pipenv shell`
 
-These match the environments listed in our _manifest.ini_ file.
 
-Then just use the command _tox_ to run the tests.
+## Running The Tests
+
+You can run these tests using `pytest --env=TEST_ENV config-tests/` where `TEST_ENV`
+is one of the environments listed in the `manifest.ini` file.
+
+
