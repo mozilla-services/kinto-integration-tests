@@ -42,7 +42,7 @@ Once you've installed Pipenv, you can do the following:
 * activate the virtual environment using `pipenv shell`
 
 
-## Running The Tests
+## Running the Tests
 
 You can run these tests using `pytest --env=TEST_ENV config-tests/` where `TEST_ENV`
 is one of the environments listed in the `manifest.ini` file.
