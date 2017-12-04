@@ -17,5 +17,4 @@ setup(name='fxtesteng',
       author_email='chartjes@mozilla.com',
       version='1.0',
       packages=['fxtesteng'],
-      install_requires=REQUIREMENTS,
-)
+      install_requires=REQUIREMENTS)
