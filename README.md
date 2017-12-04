@@ -9,42 +9,21 @@ This repo is a clearinghouse for all automated tests that don't need to reside i
 They would include a variety of test types that usually fall in the middle of the test pyramid:
 API tests, config and URL checks, deployment tests, end-2-end tests, security tests, etc.
 
-These tests can all be run at a go using the "run" file or executed via a Docker container.
+## Preparing the tests
 
-## General Configuration
+Building the image for running tests requires you to have
+[Docker](https://www.docker.com/) installed:
 
-These are the minimum requirements:
-
-* Python 3.5.2 or greater
-
-### Installing Dependencies via Virtualenv and Pip
-
-You can install all the dependencies for running these tests locally by installing:
-
-* pip (https://pip.readthedocs.io/en/stable/)
-* virtualenv (https://virtualenv.pypa.io/en/stable/)
-
-Please follow the instructions on how to install those tools and then do the following:
-
-* create a virtual environment using the minimum recommended version of Python
-* activate the virtual environment
-* install the required dependencies using `pip install -r requirements.txt`
-
-
-### Installing Dependencies via Pipenv
-
-Pipenv (https://docs.pipenv.org/) can also be used to install the required dependencies.
-Please consult the documentation for the project for instructions on installing it.
-
-Once you've installed Pipenv, you can do the following:
-
-* create the virtual environment and install dependencies using `pipenv install`
-* activate the virtual environment using `pipenv shell`
-
+```shell
+docker build -t kinto-integration-tests
+```
 
 ## Running the Tests
 
-You can run these tests using `pytest --env=TEST_ENV config-tests/` where `TEST_ENV`
-is one of the environments listed in the `manifest.ini` file.
+You can run these tests using the following command:
 
+```shell
+docker run kinto-integration-tests pytest --env=TEST_ENV config-test/
+```
 
+Where `TEST_ENV` is one of the environments listed in the `manifest.ini` file.
