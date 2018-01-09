@@ -44,6 +44,7 @@ def api(event_loop, conf, env):
 
 
 @pytest.mark.asyncio
+@pytest.mark.dist
 async def test_version(api, conf, env, apiversion):
     res = await api.__version__()
     data = await res.json()
@@ -63,6 +64,7 @@ async def test_version(api, conf, env, apiversion):
 
 
 @pytest.mark.asyncio
+@pytest.mark.dist
 async def test_heartbeat(api, conf, env):
     res = await api.__heartbeat__()
     data = await res.json()
@@ -78,6 +80,7 @@ async def test_heartbeat(api, conf, env):
 
 
 @pytest.mark.asyncio
+@pytest.mark.dist
 async def test_server_info(api, conf, env):
     res = await api.server_info()
     data = await res.json()
@@ -91,6 +94,7 @@ async def test_server_info(api, conf, env):
 
 
 @pytest.mark.asyncio
+@pytest.mark.dist
 async def test_contribute(api, conf, env):
     res = await api.contribute()
     data = await res.json()
@@ -104,7 +108,8 @@ async def test_contribute(api, conf, env):
 
 
 @pytest.mark.asyncio
-async def test_get_changess(api, conf, env):
+@pytest.mark.dist
+async def test_get_changes(api, conf, env):
     res = await api.get_changess()
     data = await res.json()
 

@@ -15,7 +15,7 @@ Building the image for running tests requires you to have
 [Docker](https://www.docker.com/) installed:
 
 ```shell
-docker build -t kinto-integration-tests
+docker build -t kinto-integration-tests .
 ```
 
 ## Running the Tests
