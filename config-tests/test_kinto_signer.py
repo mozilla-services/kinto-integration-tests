@@ -39,6 +39,7 @@ def verify_signatures(collection, records, timestamp):
 
 
 @pytestrail.case('C7107')
+@pytest.mark.settings
 def test_addons_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'reader_server'),
@@ -59,6 +60,7 @@ def test_addons_signatures(env, conf):
 
 
 @pytestrail.case('C7104')
+@pytest.mark.settings
 def test_plugins_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'reader_server'),
@@ -79,6 +81,7 @@ def test_plugins_signatures(env, conf):
 
 
 @pytestrail.case('C7105')
+@pytest.mark.settings
 def test_gfx_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'reader_server'),
@@ -99,6 +102,7 @@ def test_gfx_signatures(env, conf):
 
 
 @pytestrail.case('C7106')
+@pytest.mark.settings
 def test_certificates_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'reader_server'),
@@ -119,6 +123,7 @@ def test_certificates_signatures(env, conf):
 
 
 @pytestrail.case('C10491')
+@pytest.mark.settings
 def test_certificate_pinning_signatures(env, conf):
     client = Client(
         server_url=conf.get(env, 'reader_server'),

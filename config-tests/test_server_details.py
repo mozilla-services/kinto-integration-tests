@@ -1,5 +1,4 @@
 import asyncio
-import configparser
 import pytest
 from pyramid.compat import string_types
 from smwogger import API
@@ -27,25 +26,27 @@ def aslist(value, flatten=True):
 
 
 @pytest.fixture(scope="module")
-def conf():
-    config = configparser.ConfigParser()
-    config.read('manifest.ini')
-    return config
-
-
-@pytest.fixture(scope="module")
 def event_loop():
     return asyncio.get_event_loop()
 
 
 @pytest.fixture(scope="module")
-def api(event_loop, conf, env):
-    return API(conf.get(env, 'api_definition'), loop=event_loop)
+def api(event_loop, conf, env, request):
+    api_definition = 'dist_api_definition'
+
+    if 'settings' in request.node.keywords:
+        api_definition = 'settings_api_definition'
+    elif 'webextensions' in request.node.keywords:
+        api_definition = 'webextensions_api_definitions'
+
+    return API(conf.get(env, api_definition), loop=event_loop)
 
 
 @pytest.mark.asyncio
 @pytest.mark.dist
-async def test_version(api, conf, env, apiversion):
+@pytest.mark.settings
+@pytest.mark.webextensions
+async def test_version(api, conf, env, apiversion, request):
     res = await api.__version__()
     data = await res.json()
     expected_fields = aslist(conf.get(env, 'version_fields'))
@@ -65,6 +66,8 @@ async def test_version(api, conf, env, apiversion):
 
 @pytest.mark.asyncio
 @pytest.mark.dist
+@pytest.mark.settings
+@pytest.mark.webextensions
 async def test_heartbeat(api, conf, env):
     res = await api.__heartbeat__()
     data = await res.json()
@@ -81,6 +84,8 @@ async def test_heartbeat(api, conf, env):
 
 @pytest.mark.asyncio
 @pytest.mark.dist
+@pytest.mark.settings
+@pytest.mark.webextensions
 async def test_server_info(api, conf, env):
     res = await api.server_info()
     data = await res.json()
@@ -95,6 +100,8 @@ async def test_server_info(api, conf, env):
 
 @pytest.mark.asyncio
 @pytest.mark.dist
+@pytest.mark.settings
+@pytest.mark.webextensions
 async def test_contribute(api, conf, env):
     res = await api.contribute()
     data = await res.json()
@@ -109,7 +116,9 @@ async def test_contribute(api, conf, env):
 
 @pytest.mark.asyncio
 @pytest.mark.dist
-async def test_get_changes(api, conf, env):
+@pytest.mark.settings
+@pytest.mark.webextensions
+async def test_get_changes(api):
     res = await api.get_changess()
     data = await res.json()
 

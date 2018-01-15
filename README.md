@@ -11,19 +11,21 @@ API tests, config and URL checks, deployment tests, end-2-end tests, security te
 
 ## Preparing the tests
 
-Building the image for running tests requires you to have
-[Docker](https://www.docker.com/) installed:
+To run the tests, you need to have the following installed:
 
-```shell
-docker build -t kinto-integration-tests .
-```
+* Python 3.6 or greater
+* [Pipenv](https://pipenv.readthedocs.io/en/latest/)
+
 
 ## Running the Tests
 
-You can run these tests using the following command:
+You can run these tests using the following commands from inside the root directory for the project.
 
 ```shell
-docker run kinto-integration-tests pytest --env=TEST_ENV config-test/
+pipenv install
+pipenv shell
+pytest -m TEST_TYPE --env=TEST_ENV config-tests/
 ```
 
-Where `TEST_ENV` is one of the environments listed in the `manifest.ini` file.
+* `TEST_TYPE` is `dist` for `kinto-dist` deployments, `settings` for `kinto-settings` deployments and `webextensions` for `kintowe` deployments
+* `TEST_ENV` is one of the environments listed in the `manifest.ini` file.

@@ -14,6 +14,7 @@ def conf():
 
 
 @pytestrail.case('C81661')
+@pytest.mark.settings
 def test_fennec_dlc_exists(env, conf):
     r = requests.get(conf.get(env, 'font_collection'))
     response = r.json()
@@ -35,6 +36,7 @@ def test_fennec_dlc_exists(env, conf):
 
 
 @pytestrail.case('C81662')
+@pytest.mark.settings
 def test_fonts_fingerprinting_defenses(env, conf):
     r = requests.get(conf.get(env, 'fingerprinting-defenses'))
     response = r.json()
@@ -51,6 +53,7 @@ def test_fonts_fingerprinting_defenses(env, conf):
 
 
 @pytestrail.case('C81663')
+@pytest.mark.settings
 def test_fonts_fingerprinting_defenses_preview(env, conf):
     r = requests.get(conf.get(env, 'fingerprinting-defenses-preview'))
     response = r.json()

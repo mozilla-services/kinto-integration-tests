@@ -15,6 +15,7 @@ kinto-http = "*"
 pytest-testrail = "*"
 smwogger = "*"
 pytest-asyncio = "*"
+pyfxa = "*"
 
 
 [dev-packages]

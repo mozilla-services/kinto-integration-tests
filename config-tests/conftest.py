@@ -1,4 +1,5 @@
 # Configuration file for running contract-tests
+import configparser
 import pytest
 import ssl
 
@@ -20,6 +21,13 @@ def pytest_addoption(parser):
         dest="apiversion",
         help="Optional param: version of API under test"
     )
+
+
+@pytest.fixture(scope="module")
+def conf():
+    config = configparser.ConfigParser()
+    config.read('manifest.ini')
+    return config
 
 
 @pytest.fixture(scope="module")
