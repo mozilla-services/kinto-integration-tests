@@ -46,7 +46,7 @@ def api(event_loop, conf, env, request):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
-async def test_version(api, conf, env, apiversion, request):
+async def test_version(api, conf, env, apiversion):
     res = await api.__version__()
     data = await res.json()
     expected_fields = aslist(conf.get(env, 'version_fields'))
