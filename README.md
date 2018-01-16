@@ -24,7 +24,7 @@ You can run these tests using the following commands from inside the root direct
 ```shell
 pipenv install
 pipenv shell
-pytest -m TEST_TYPE --env=TEST_ENV config-tests/
+pytest -m TEST_TYPE --env=TEST_ENV
 ```
 
 * `TEST_TYPE` is `dist` for `kinto-dist` deployments, `settings` for `kinto-settings` deployments and `webextensions` for `kintowe` deployments
