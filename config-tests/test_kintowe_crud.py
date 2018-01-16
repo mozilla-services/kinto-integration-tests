@@ -29,7 +29,7 @@ def test_add_content(env, conf):
     m = acct.wait_for_email(lambda m: "x-verify-code" in m["headers"])
 
     if m is None:
-        raise RuntimeErrors("Verification email did not arrive")
+        raise RuntimeError("Verification email did not arrive")
 
     session.verify_email_code(m["headers"]["x-verify-code"])
     auth = FxABearerTokenAuth(
