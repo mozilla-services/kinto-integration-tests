@@ -5,6 +5,10 @@ pipeline {
   libraries {
     lib('fxtest@1.9')
   }
+  environment {
+    PROJECT = "${JOB_NAME.split('\\.')[0]}"
+    TEST_ENV = "${JOB_NAME.split('\\.')[1]}"
+  }
   options {
     ansiColor('xterm')
     timestamps()
@@ -16,9 +20,20 @@ pipeline {
         sh "flake8"
       }
     }
-    stage('Test') {
+    stage('Test kinto-dist') {
+      when {
+        environment name: 'PROJECT', value: 'kinto'
+      }
       steps {
-        sh "pytest --env=${env.TEST_ENV}"
+        sh "pytest -m dist --env=${TEST_ENV}"
+      }
+    }
+    stage('Test kintowe') {
+      when {
+        environment name: 'PROJECT', value: 'kintowe'
+      }
+      steps {
+        sh "pytest -m webextensions --env=${TEST_ENV}"
       }
     }
   }
