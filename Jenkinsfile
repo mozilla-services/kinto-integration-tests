@@ -6,8 +6,8 @@ pipeline {
     lib('fxtest@1.9')
   }
   environment {
-    PROJECT = "${JOB_NAME.split('\\.')[0]}"
-    TEST_ENV = "${JOB_NAME.split('\\.')[1]}"
+    PROJECT = "${PROJECT ?: JOB_NAME.split('\\.')[0]}"
+    TEST_ENV = "${TEST_ENV ?: JOB_NAME.split('\\.')[1]}"
   }
   options {
     ansiColor('xterm')
