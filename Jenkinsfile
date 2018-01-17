@@ -3,7 +3,7 @@ pipeline {
     dockerfile true
   }
   libraries {
-    lib('fxtest@1.9')
+    lib('fxtest@1.10')
   }
   environment {
     PROJECT = "${PROJECT ?: JOB_NAME.split('\\.')[0]}"
