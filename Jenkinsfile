@@ -18,7 +18,7 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh "pytest --env=${env.TEST_ENV} config-test/"
+        sh "pytest --env=${env.TEST_ENV}"
       }
     }
   }
