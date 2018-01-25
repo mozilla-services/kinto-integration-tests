@@ -39,8 +39,8 @@ pipeline {
   }
   post {
     failure {
-      ircNotification(#storage)
-      ircNotification(#fx-test-alerts)
+      ircNotification('#storage')
+      ircNotification('#fx-test-alerts')
       emailext(
         attachLog: true,
         body: '$BUILD_URL\n\n$FAILED_TESTS',
