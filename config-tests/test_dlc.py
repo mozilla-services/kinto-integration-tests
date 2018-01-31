@@ -13,7 +13,7 @@ def conf():
     return config
 
 
-@pytestrail.case('C81661')
+@pytestrail.case('C122567')
 @pytest.mark.settings
 def test_fennec_dlc_exists(env, conf):
     r = requests.get(conf.get(env, 'font_collection'))
@@ -35,7 +35,7 @@ def test_fennec_dlc_exists(env, conf):
         assert record['attachment']['hash'] == m.hexdigest()
 
 
-@pytestrail.case('C81662')
+@pytestrail.case('C122568')
 @pytest.mark.settings
 def test_fonts_fingerprinting_defenses(env, conf):
     r = requests.get(conf.get(env, 'fingerprinting-defenses'))
@@ -52,7 +52,7 @@ def test_fonts_fingerprinting_defenses(env, conf):
         assert 'hash' in record['attachment']
 
 
-@pytestrail.case('C81663')
+@pytestrail.case('C122569')
 @pytest.mark.settings
 def test_fonts_fingerprinting_defenses_preview(env, conf):
     r = requests.get(conf.get(env, 'fingerprinting-defenses-preview'))

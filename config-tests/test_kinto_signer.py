@@ -38,7 +38,7 @@ def verify_signatures(collection, records, timestamp):
         return 0
 
 
-@pytestrail.case('C7107')
+@pytestrail.case('C122561')
 @pytest.mark.settings
 def test_addons_signatures(env, conf):
     client = Client(
@@ -59,7 +59,7 @@ def test_addons_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C7104')
+@pytestrail.case('C122562')
 @pytest.mark.settings
 def test_plugins_signatures(env, conf):
     client = Client(
@@ -80,7 +80,7 @@ def test_plugins_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C7105')
+@pytestrail.case('C122563')
 @pytest.mark.settings
 def test_gfx_signatures(env, conf):
     client = Client(
@@ -101,7 +101,7 @@ def test_gfx_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C7106')
+@pytestrail.case('C122564')
 @pytest.mark.settings
 def test_certificates_signatures(env, conf):
     client = Client(
@@ -122,7 +122,7 @@ def test_certificates_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C10491')
+@pytestrail.case('C122565')
 @pytest.mark.settings
 def test_certificate_pinning_signatures(env, conf):
     client = Client(

@@ -6,6 +6,7 @@ from fxa.core import Client as FxaClient
 from fxa.plugins.requests import FxABearerTokenAuth
 from fxa.tests.utils import TestEmailAccount
 from kinto_http import Client
+from pytest_testrail.plugin import pytestrail
 
 
 @pytest.fixture
@@ -16,6 +17,7 @@ def conf():
 
 
 @pytest.mark.webextensions
+@pytestrail.case('C122566')
 def test_add_content(env, conf):
     # TODO -- fix this test so it will run in production
     if env == 'prod':

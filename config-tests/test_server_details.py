@@ -1,6 +1,7 @@
 import asyncio
 import pytest
 from pyramid.compat import string_types
+from pytest_testrail.plugin import pytestrail
 from smwogger import API
 
 
@@ -46,6 +47,7 @@ def api(event_loop, conf, env, request):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
+@pytestrail.case('C122557')
 async def test_version(api, conf, env, apiversion):
     res = await api.__version__()
     data = await res.json()
@@ -68,6 +70,7 @@ async def test_version(api, conf, env, apiversion):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
+@pytestrail.case('C122558')
 async def test_heartbeat(api, conf, env):
     res = await api.__heartbeat__()
     data = await res.json()
@@ -86,6 +89,7 @@ async def test_heartbeat(api, conf, env):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
+@pytestrail.case('C122559')
 async def test_server_info(api, conf, env):
     res = await api.server_info()
     data = await res.json()
@@ -102,6 +106,7 @@ async def test_server_info(api, conf, env):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
+@pytestrail.case('C122560')
 async def test_contribute(api, conf, env):
     res = await api.contribute()
     data = await res.json()
