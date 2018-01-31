@@ -112,15 +112,3 @@ async def test_contribute(api, conf, env):
 
     for field in expected_fields:
         assert field in data
-
-
-@pytest.mark.asyncio
-@pytest.mark.dist
-@pytest.mark.settings
-@pytest.mark.webextensions
-async def test_get_changes(api):
-    res = await api.get_changess()
-    data = await res.json()
-
-    for record in data['data']:
-        assert 'host' in record
