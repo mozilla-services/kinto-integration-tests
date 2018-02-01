@@ -1,7 +1,7 @@
 # Summary
 Tests for the Kinto server fall into 3 categories:
 
-1. unit tests - located here: https://github.com/Kinto/kinto/tests
+1. unit tests - located here: https://github.com/Kinto/kinto/tree/master/tests
 2. loadtests - located here:  https://github.com/Kinto/kinto-loadtests
 3. configuration check tests - located in this repo
 
