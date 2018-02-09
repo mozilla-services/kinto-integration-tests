@@ -1,5 +1,6 @@
 import configparser
 import pytest
+import requests
 from kinto_signer.serializer import canonical_json
 from kinto_signer.signer.local_ecdsa import ECDSASigner
 from kinto_http import Client, KintoException
@@ -141,3 +142,32 @@ def test_certificate_pinning_signatures(env, conf):
         if e.response.status_code == 401:
             pytest.fail('pinning/pins does not exist')
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
+
+
+@pytestrail.case('C122566')
+@pytest.mark.settings
+def test_blocklist_timestamp(env, conf):
+    client = Client(
+        server_url=conf.get(env, 'reader_server'),
+        bucket='blocklists'
+    )
+    # Take the highest timestamp of the collections contained in the blocklist.xml.
+    last_modified = -1
+    for cid in ('addons', 'plugins', 'gfx'):
+        records = client.get_records(collection=cid, _sort='-last_modified',
+                                     _limit=1, enabled='true')
+        if len(records) > 0:
+            last_modified = max(last_modified, records[0]['last_modified'])
+
+    # Read the current XML blocklist ETag.
+    blocklist_uri = conf.get(env, 'reader_server') + (
+        'blocklist/3/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}/58.0'
+        '/Firefox/20180123185941/Darwin_x86_64-gcc3-u-i386-x86_64'
+        '/en-US/release/Darwin 17.4.0/default/default/invalid/invalid/0/')
+    r = requests.get(blocklist_uri)
+    r.raise_for_status()
+    xml_last_modified = int(r.headers.get('ETag', '')[1:-1])
+
+    # Make sure they match.
+    # See https://bugzilla.mozilla.org/show_bug.cgi?id=1436469
+    assert last_modified == xml_last_modified
