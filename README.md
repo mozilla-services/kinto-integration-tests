@@ -30,7 +30,7 @@ $ pytest -m TEST_TYPE --env=TEST_ENV
 * `TEST_TYPE` is `dist` for `kinto-dist` deployments, `settings` for `kinto-settings` deployments and `webextensions` for `kintowe` deployments
 * `TEST_ENV` is one of the environments listed in the `manifest.ini` file.
 
-### Running the tests using Docker ###
+### Running the tests using Docker
 
 With [Docker](https://www.docker.com) installed, running the tests is as simple as first building:
 
