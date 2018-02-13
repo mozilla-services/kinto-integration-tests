@@ -17,15 +17,28 @@ To run the tests, you need to have the following installed:
 * [Pipenv](https://pipenv.readthedocs.io/en/latest/)
 
 
-## Running the Tests
+## Running the tests
 
-You can run these tests using the following commands from inside the root directory for the project.
+You can run these tests using the following commands from inside the root directory for the project:
 
 ```shell
-pipenv install
-pipenv shell
-pytest -m TEST_TYPE --env=TEST_ENV
+$ pipenv install
+$ pipenv shell
+$ pytest -m TEST_TYPE --env=TEST_ENV
 ```
 
 * `TEST_TYPE` is `dist` for `kinto-dist` deployments, `settings` for `kinto-settings` deployments and `webextensions` for `kintowe` deployments
 * `TEST_ENV` is one of the environments listed in the `manifest.ini` file.
+
+### Running the tests using Docker ###
+
+With [Docker](https://www.docker.com) installed, running the tests is as simple as first building:
+
+```shell
+$ docker build -t kinto-tests .
+```
+
+Then, you can run the tests like so (substituting your TEST_TYPE and TEST_ENV):
+```shell
+$ docker run -it kinto-tests pytest -m settings --env=stage
+```
