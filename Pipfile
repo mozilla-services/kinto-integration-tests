@@ -7,16 +7,15 @@ name = "pypi"
 
 [packages]
 
-pytest = "*"
+pytest = "==3.4.0"
 requests = "==2.11.1"
-kinto-signer = "*"
-pyramid = "*"
-kinto-http = "*"
-pytest-testrail = "*"
-smwogger = "*"
-pytest-asyncio = "*"
-pyfxa = "*"
+kinto-signer = "==2.2.0"
+pyramid = "==1.9.1"
+kinto-http = "==9.1.1"
+pytest-testrail = "==1.1.3"
+smwogger = "==1.0"
+pytest-asyncio = "==0.8.0"
+pyfxa = "==0.5.0"
 
 
 [dev-packages]
-

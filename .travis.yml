@@ -2,8 +2,11 @@ language: python
 python:
   - 3.6
 install:
+  - pip install -r pipenv.txt
   - pip install flake8
 script:
-  - flake8 .
+  - pipenv check
+  - pipenv sync
+  - pipenv run flake8
 notifications:
   email: fte-ci@mozilla.com
