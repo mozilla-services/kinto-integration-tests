@@ -4,6 +4,7 @@ python:
 install:
   - pip install -r pipenv.txt
 script:
+  - pipenv init --python 3.6
   - pipenv check
   - pipenv sync
   - pipenv run flake8
