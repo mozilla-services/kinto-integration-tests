@@ -3,7 +3,6 @@ python:
   - 3.6
 install:
   - pip install -r pipenv.txt
-  - pip install flake8
 script:
   - pipenv check
   - pipenv sync
