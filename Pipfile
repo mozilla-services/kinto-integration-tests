@@ -7,7 +7,7 @@ name = "pypi"
 
 [packages]
 
-pytest = "==3.4.0"
+pytest = "==3.4.2"
 requests = "==2.11.1"
 kinto-signer = "==2.2.0"
 pyramid = "==1.9.1"
@@ -20,3 +20,4 @@ flake8 = "==3.5.0"
 
 
 [dev-packages]
+
