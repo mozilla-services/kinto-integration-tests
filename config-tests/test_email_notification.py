@@ -4,12 +4,12 @@ from random import randint
 
 
 @pytest.mark.settings
-def test_email_notifications_work(env, conf):
+def test_email_notifications_work(env, conf, qacollectionuser, qacollectionpasswd):
     if env != 'stage':
         pytest.skip('Test skipped in production')
 
     url = conf.get(env, 'qa_collection_url')
-    auth = (conf.get(env, 'qa_collection_login'), conf.get(env, 'qa_collection_password'))
+    auth = (qacollectionuser, qacollectionpasswd)
 
     # Add record to QA collection
     data = {'data': {'qa': randint(1, 99999)}}
@@ -35,4 +35,4 @@ def test_email_notifications_work(env, conf):
 
     # The email with the review message is always the first one
     email = emails[0]
-    assert email['text'] == "Review changes at " + conf.get(env, 'qa_review_message_url') + "\n"
+    assert email['text'] == "For QA purposes :)\n"
