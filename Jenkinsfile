@@ -39,6 +39,14 @@ pipeline {
       steps {
         sh "pytest -m webextensions --env=${TEST_ENV}"
       }
+    },
+    stage('Test kinto-settings') {
+      when {
+        environment name: 'PROJECT' value: 'kinto-settings'
+      }
+      steps {
+        sh "pytest -m settings --env=${TEST_ENV} --qa_collection_user=${USERNAME} --qa_collection_passwd=${PASSWORD}"
+      }
     }
   }
   post {
