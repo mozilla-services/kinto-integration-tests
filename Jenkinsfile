@@ -40,7 +40,7 @@ pipeline {
       steps {
         sh "pytest -m webextensions --env=${TEST_ENV}"
       }
-    },
+    }
     stage('Test kinto-settings') {
       when {
         environment name: 'PROJECT', value: 'kinto-settings'
