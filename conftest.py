@@ -23,14 +23,14 @@ def pytest_addoption(parser):
     )
 
     parser.addoption(
-        "--qa_collection_user",
-        dest="qa_collection_user",
+        "--qa-collection-user",
+        dest="qauser",
         help="Optional param: user who can access QA collection in staging"
     )
 
     parser.addoption(
-        "--qa_collection_passwd",
-        dest="qa_collection_passwd",
+        "--qa-collection-passwd",
+        dest="qa_passwd",
         help="Optional param: password for user who can access QA collection in staging"
     )
 
@@ -52,11 +52,11 @@ def apiversion(request):
     return request.config.getoption("--api-version")
 
 
-@pytest.fixture(scope="module")
-def qacollectionuser(request):
-    return request.config.getoption("--qa_collection_user")
+@pytest.fixture(scope="session")
+def qauser(pytestconfig):
+    return pytestconfig.getoption('--qa-collection-user')
 
 
-@pytest.fixture(scope="module")
-def qacollectionpasswd(request):
-    return request.config.getoption("--qa_collection_passwd")
+@pytest.fixture(scope="session")
+def qapasswd(pytestconfig):
+    return pytestconfig.getoption("--qa-collection-passwd")

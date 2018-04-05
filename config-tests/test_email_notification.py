@@ -4,12 +4,16 @@ from random import randint
 
 
 @pytest.mark.settings
-def test_email_notifications_work(env, conf, qacollectionuser, qacollectionpasswd):
+@pytest.mark.skipif(
+    pytest.config.getoption('env') != 'stage',
+    reason='Test only runs on staging'
+)
+def test_email_notifications_work(env, conf, qauser, qapasswd):
     if env != 'stage':
         pytest.skip('Test skipped in production')
 
     url = conf.get(env, 'qa_collection_url')
-    auth = (qacollectionuser, qacollectionpasswd)
+    auth = (qauser, qapasswd)
 
     # Add record to QA collection
     data = {'data': {'qa': randint(1, 99999)}}

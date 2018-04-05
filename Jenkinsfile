@@ -46,7 +46,7 @@ pipeline {
         environment name: 'PROJECT', value: 'kinto-settings'
       }
       steps {
-        sh "pytest -m settings --env=${TEST_ENV} --qa_collection_user=${KINTO_QA_USR} --qa_collection_passwd=${KINTO_QA_PSW}"
+        sh "pytest -m settings --env=${TEST_ENV} --qa-collection-user=${KINTO_QA_USR} --qa-collection-passwd=${KINTO_QA_PSW}"
       }
     }
   }
