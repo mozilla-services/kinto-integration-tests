@@ -9,9 +9,6 @@ from random import randint
     reason='Test only runs on staging'
 )
 def test_email_notifications_work(env, conf, qauser, qapasswd):
-    if env != 'stage':
-        pytest.skip('Test skipped in production')
-
     url = conf.get(env, 'qa_collection_url')
     auth = (qauser, qapasswd)
 
