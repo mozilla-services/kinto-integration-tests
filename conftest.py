@@ -22,6 +22,18 @@ def pytest_addoption(parser):
         help="Optional param: version of API under test"
     )
 
+    parser.addoption(
+        "--qa-collection-user",
+        dest="qauser",
+        help="Optional param: user who can access QA collection in staging"
+    )
+
+    parser.addoption(
+        "--qa-collection-passwd",
+        dest="qa_passwd",
+        help="Optional param: password for user who can access QA collection in staging"
+    )
+
 
 @pytest.fixture(scope="module")
 def conf():
@@ -38,3 +50,13 @@ def env(request):
 @pytest.fixture(scope="module")
 def apiversion(request):
     return request.config.getoption("--api-version")
+
+
+@pytest.fixture(scope="session")
+def qauser(pytestconfig):
+    return pytestconfig.getoption('--qa-collection-user')
+
+
+@pytest.fixture(scope="session")
+def qapasswd(pytestconfig):
+    return pytestconfig.getoption("--qa-collection-passwd")

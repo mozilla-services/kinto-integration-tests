@@ -8,6 +8,7 @@ pipeline {
   environment {
     PROJECT = "${PROJECT ?: JOB_NAME.split('\\.')[0]}"
     TEST_ENV = "${TEST_ENV ?: JOB_NAME.split('\\.')[1]}"
+    KINTO_QA = credentials('kintoqa')
   }
   triggers {
     pollSCM('H/5 * * * *')
@@ -38,6 +39,14 @@ pipeline {
       }
       steps {
         sh "pytest -m webextensions --env=${TEST_ENV}"
+      }
+    },
+    stage('Test kinto-settings') {
+      when {
+        environment name: 'PROJECT', value: 'kinto-settings'
+      }
+      steps {
+        sh "pytest -m settings --env=${TEST_ENV} --qa-collection-user=${KINTO_QA_USR} --qa-collection-passwd=${KINTO_QA_PSW}"
       }
     }
   }
