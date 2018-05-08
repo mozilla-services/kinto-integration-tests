@@ -8,7 +8,8 @@ pipeline {
   environment {
     PROJECT = "${PROJECT ?: JOB_NAME.split('\\.')[0]}"
     TEST_ENV = "${TEST_ENV ?: JOB_NAME.split('\\.')[1]}"
-    KINTO_QA = credentials('kintoqa')
+    KINTO_QA = credentials('kintoqa'),
+    KINTO_RS = credentials('KINTO_RS')
   }
   triggers {
     pollSCM('H/5 * * * *')
@@ -46,6 +47,7 @@ pipeline {
         environment name: 'PROJECT', value: 'kinto-settings'
       }
       steps {
+        sh "cp ${KINTO_DOTENV} .env"
         sh "pytest -m settings --env=${TEST_ENV} --qa-collection-user=${KINTO_QA_USR} --qa-collection-passwd=${KINTO_QA_PSW}"
       }
     }
