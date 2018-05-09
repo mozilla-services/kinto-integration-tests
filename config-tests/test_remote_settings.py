@@ -38,6 +38,7 @@ def test_create_collection_in_main_bucket(conf, env):
         data={"status": "to-review"}
     )
     pre_sign_info = client.get_collection(id=collection)
+    assert client.get_record(id=new_record_id, collection=collection, bucket='main-preview') is not False
 
     # Create a second client to act as the reviewer and approve the request
     reviewer_client = Client(
@@ -49,6 +50,7 @@ def test_create_collection_in_main_bucket(conf, env):
         id=collection,
         data={"status": "to-sign"}
     )
+    assert client.get_record(id=new_record_id, collection=collection, bucket='main') is not False
 
     # If last_signature_date has changed, we know the signing successfully happened
     post_sign_info = client.get_collection(id=collection)
