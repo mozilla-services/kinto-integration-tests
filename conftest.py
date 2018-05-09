@@ -2,15 +2,10 @@ import configparser
 import pytest
 import ssl
 
-from dotenv import load_dotenv, find_dotenv
-
 
 # Hack because of how SSL certificates are verified by default in Python
 if hasattr(ssl, '_create_unverified_context'):
     ssl._create_default_https_context = ssl._create_unverified_context
-
-# Load our dotenv file
-load_dotenv(find_dotenv())
 
 
 def pytest_addoption(parser):
