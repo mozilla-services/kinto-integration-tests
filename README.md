@@ -1,3 +1,8 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Kinto/kinto-integration-tests/blob/master/LICENSE)
+[![travis](https://img.shields.io/travis/Kinto/kinto-integration-tests.svg?label=travis)](http://travis-ci.org/Kinto/kinto-integration-tests/)
+[![updates](https://pyup.io/repos/github/Kinto/kinto-integration-tests/shield.svg)](https://pyup.io/repos/github/Kinto/kinto-integration-tests/)
+[![Python 3](https://pyup.io/repos/github/Kinto/kinto-integration-tests/python-3-shield.svg)](https://pyup.io/repos/github/Kinto/kinto-integration-tests/)
+
 # Summary
 Tests for the Kinto server fall into 3 categories:
 
