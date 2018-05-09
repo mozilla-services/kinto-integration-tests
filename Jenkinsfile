@@ -8,7 +8,7 @@ pipeline {
   environment {
     PROJECT = "${PROJECT ?: JOB_NAME.split('\\.')[0]}"
     TEST_ENV = "${TEST_ENV ?: JOB_NAME.split('\\.')[1]}"
-    KINTO_QA = credentials('kintoqa'),
+    KINTO_QA = credentials('kintoqa')
     KINTO_DOTENV = credentials('KINTO_DOTENV')
   }
   triggers {
