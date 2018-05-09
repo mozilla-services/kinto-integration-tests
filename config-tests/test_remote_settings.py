@@ -13,7 +13,7 @@ from kinto_http.patch_type import JSONPatch
 def test_create_collection_in_main_bucket(conf, env):
     # Create a record inside the 'main-workspace' bucket and then
     # PATCH the collection to say someone else can review it
-    collection = 'qatest1'
+    collection = "qatest"
     client = Client(
         server_url=conf.get(env, "writer_server"),
         auth=(os.getenv("RS_USER_1_LOGIN"), os.getenv("RS_USER_1_PASSWD")),
