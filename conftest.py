@@ -1,7 +1,7 @@
-# Configuration file for running contract-tests
 import configparser
 import pytest
 import ssl
+
 
 # Hack because of how SSL certificates are verified by default in Python
 if hasattr(ssl, '_create_unverified_context'):

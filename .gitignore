@@ -6,7 +6,6 @@ __pycache__/
 *.egg
 *.pyc
 *.sw[op]
-Pipfile.lock
 records.json
 mail/
 venv/
