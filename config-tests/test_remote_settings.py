@@ -1,6 +1,5 @@
 import os
 import pytest
-import uuid
 
 from kinto_http import Client
 from kinto_http.patch_type import JSONPatch
