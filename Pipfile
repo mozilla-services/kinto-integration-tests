@@ -1,6 +1,6 @@
 [[source]]
 
-url = "https://pypi.python.org/simple"
+url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
 
@@ -20,4 +20,3 @@ flake8 = "==3.5.0"
 
 
 [dev-packages]
-
