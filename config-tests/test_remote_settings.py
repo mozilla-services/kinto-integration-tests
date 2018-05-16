@@ -22,7 +22,9 @@ def test_create_collection_in_main_bucket(conf, env):
     )
     client.create_collection(id=collection, if_not_exists=True)
     changes = JSONPatch(
-        [dict(op="add", path="/data/members/0", value="ldap:{0}".format(os.getenv("RS_USER_2_LOGIN")))]
+        [dict(op="add", path="/data/members/0", value="ldap:{0}".format(os.getenv("RS_USER_2_LOGIN")))],
+        # Allow the refresh signature lambda to write to this collection too. 
+        [dict(op="add", path="/data/members/0", value="ldap:cloudservices_kinto_prod")],
     )
     client.patch_group(
         id="{0}-reviewers".format(collection),
