@@ -74,15 +74,19 @@ def test_delete_request_removes_data(conf, env):
     # make sure that an unauthenticated user can see these records
     # before we delete the account
     we_bucket_id = we_client.server_info()["user"]["bucket"]
-    resp = requests.get(
-        conf.get(env, 'we_server_url') +
-        '/buckets/{0}/collections/qa_collection/records/{1}'.format(we_bucket_id, we_record_id))
-    assert resp.status_code == 200
+    anon_we_client = Client(server_url=conf.get(env, 'we_server_url'))
+    resp = anon_we_client.get_record(
+        id=we_record_id,
+        bucket=we_bucket_id,
+        collection=conf.get(env, 'qa_collection'))
+    assert resp['data']['id'] == we_record_id
     tp_bucket_id = tp_client.server_info()["user"]["bucket"]
-    resp = requests.get(
-        conf.get(env, 'tp_server_url') +
-        '/buckets/{0}/collections/notes/records/{1}'.format(tp_bucket_id, tp_record_id))
-    assert resp.status_code == 200
+    anon_tp_client = Client(server_url=conf.get(env, 'tp_server_url'))
+    resp = anon_tp_client.get_record(
+        id=tp_record_id,
+        bucket=tp_bucket_id,
+        collection='notes')
+    assert resp['data']['id'] == tp_record_id
 
     # Delete FxA account
     acct.clear()
@@ -92,7 +96,7 @@ def test_delete_request_removes_data(conf, env):
     time.sleep(301)
     resp = requests.get(
         conf.get(env, 'we_server_url') +
-        '/buckets/{0}/collections/qa_collection/records/{1}'.format(we_bucket_id, we_record_id))
+        '/buckets/{0}/collections/{1}/records/{2}'.format(we_bucket_id, conf.get(env, 'qa_collection'), we_record_id))
     assert resp.status_code > 400
     tp_bucket_id = tp_client.server_info()["user"]["bucket"]
     resp = requests.get(
