@@ -17,6 +17,7 @@ def conf():
     return config
 
 
+@pytest.mark.webextensions
 def test_delete_request_removes_data(conf, env):
     # Create a test user on FxA
     acct = TestEmailAccount()
