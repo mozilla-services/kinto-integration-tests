@@ -19,6 +19,7 @@ def conf():
 
 @pytest.mark.webextensions
 def test_delete_request_removes_data(conf, env):
+    pytest.skip('skipping until GDPR SQS listeners are deployed to production')
     # Create a test user on FxA
     acct = TestEmailAccount()
     email = acct.email
