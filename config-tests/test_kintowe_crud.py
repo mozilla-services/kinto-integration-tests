@@ -26,7 +26,7 @@ def test_add_content(env, conf):
     acct = TestEmailAccount()
     email = acct.email
     passwd = str(uuid.uuid4())
-    fxaclient = FxaClient("https://api.accounts.firefox.com")
+    fxaclient = FxaClient(conf.get(env, 'account_server_api'))
     session = fxaclient.create_account(email, passwd)
     m = acct.wait_for_email(lambda m: "x-verify-code" in m["headers"])
 
@@ -39,7 +39,7 @@ def test_add_content(env, conf):
         passwd,
         scopes=['sync:addon_storage'],
         client_id=DEFAULT_CLIENT_ID,
-        account_server_url=conf.get(env, 'account_server_url'),
+        account_server_url=conf.get(env, 'account_server_api'),
         oauth_server_url=conf.get(env, 'oauth_server_url'),
     )
     client = Client(server_url=conf.get(env, 'we_server_url'), auth=auth)
