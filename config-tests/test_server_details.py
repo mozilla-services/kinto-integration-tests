@@ -1,8 +1,7 @@
-import asyncio
 import pytest
 from pyramid.compat import string_types
 from pytest_testrail.plugin import pytestrail
-from smwogger import API
+import requests
 
 
 def aslist_cronly(value):
@@ -27,33 +26,24 @@ def aslist(value, flatten=True):
 
 
 @pytest.fixture(scope="module")
-def event_loop():
-    return asyncio.get_event_loop()
-
-
-@pytest.fixture(scope="module")
-def api(event_loop, conf, env, request):
-    api_definition = 'dist_api_definition'
+def api_url(conf, env, request):
+    api_url = 'dist_api'
 
     if 'settings' in request.node.keywords:
-        api_definition = 'settings_api_definition'
+        api_url = 'settings_api'
     elif 'webextensions' in request.node.keywords:
-        api_definition = 'webextensions_api_definitions'
+        api_url = 'webextensions_api'
 
-    return API(conf.get(env, api_definition), loop=event_loop)
+    return conf.get(env, api_url)
 
 
-@pytest.mark.asyncio
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
-@pytestrail.case('C122557')
-async def test_version(api, conf, env, apiversion):
-    res = await api.__version__()
-    data = await res.json()
+def test_version(conf, env, api_url):
+    data = requests.get(api_url + '__version__').json()
     expected_fields = aslist(conf.get(env, 'version_fields'))
 
-    # First, make sure that data only contains fields we expect
     for key in data:
         assert key in expected_fields
 
@@ -61,19 +51,14 @@ async def test_version(api, conf, env, apiversion):
     for field in expected_fields:
         assert field in data
 
-    # If we're passed an API version via the CLI, verify it matches
-    if apiversion:
-        assert apiversion == data['version']
 
-
-@pytest.mark.asyncio
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
 @pytestrail.case('C122558')
-async def test_heartbeat(api, conf, env):
-    res = await api.__heartbeat__()
-    data = await res.json()
+def test_heartbeat(conf, env, api_url):
+    res = requests.get(api_url + '__heartbeat__')
+    data = res.json()
     expected_fields = aslist(conf.get(env, 'heartbeat_fields'))
 
     # First, make sure that data only contains fields we expect
@@ -85,14 +70,13 @@ async def test_heartbeat(api, conf, env):
         assert field in data
 
 
-@pytest.mark.asyncio
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
 @pytestrail.case('C122559')
-async def test_server_info(api, conf, env):
-    res = await api.server_info()
-    data = await res.json()
+def test_server_info(conf, env, api_url):
+    res = requests.get(api_url)
+    data = res.json()
     expected_fields = aslist(conf.get(env, 'server_info_fields'))
 
     for key in data:
@@ -102,14 +86,13 @@ async def test_server_info(api, conf, env):
         assert field in data
 
 
-@pytest.mark.asyncio
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
 @pytestrail.case('C122560')
-async def test_contribute(api, conf, env):
-    res = await api.contribute()
-    data = await res.json()
+def test_contribute(conf, env, api_url):
+    res = requests.get(api_url + 'contribute.json')
+    data = res.json()
     expected_fields = aslist(conf.get(env, 'contribute_fields'))
 
     for key in data:
