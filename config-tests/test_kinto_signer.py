@@ -151,7 +151,7 @@ def test_certificate_pinning_signatures(env, conf):
 def test_blocklist_timestamp(env, conf):
     if env == 'prod':
         pytest.skip('Skipping blocklist timestamp test in production')
-        
+
     client = Client(
         server_url=conf.get(env, 'reader_server'),
         bucket='blocklists'
