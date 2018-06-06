@@ -18,6 +18,9 @@ def conf():
 
 @pytest.mark.webextensions
 def test_delete_request_removes_data(conf, env):
+    if env == 'prod':
+        pytest.skip('kintowe GDPR tests are not run in production')
+
     # Create a test user on FxA
     acct = TestEmailAccount()
     email = acct.email
