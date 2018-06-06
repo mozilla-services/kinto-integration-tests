@@ -54,9 +54,9 @@ def test_addons_signatures(env, conf):
         collection, records, timestamp = get_collection_data(client)
         if len(records) == 0:
             pytest.skip('blocklists/addons has no records')
-
         assert verify_signatures(collection, records, timestamp)
-        assert verify_signer_id(collection, 'onecrl_key')
+        print(collection)
+        assert verify_signer_id(collection, 'onecrl_key') or verify_signer_id(collection, 'remotesettings_key')
     except KintoException as e:
         if e.response.status_code == 401:
             pytest.fail('blocklists/addons does not exist')
@@ -75,9 +75,9 @@ def test_plugins_signatures(env, conf):
         collection, records, timestamp = get_collection_data(client)
         if len(records) == 0:
             pytest.skip('blocklists/plugins has no records')
-
+        print(collection)
         assert verify_signatures(collection, records, timestamp)
-        assert verify_signer_id(collection, 'onecrl_key')
+        assert verify_signer_id(collection, 'remotesettings_key')
     except KintoException as e:
         if e.response.status_code == 401:
             pytest.fail('blocklists/plugins does not exist')
@@ -96,9 +96,8 @@ def test_gfx_signatures(env, conf):
         collection, records, timestamp = get_collection_data(client)
         if len(records) == 0:
             pytest.skip('blocklists/gfx contains no records')
-
         assert verify_signatures(collection, records, timestamp)
-        assert verify_signer_id(collection, 'onecrl_key')
+        assert verify_signer_id(collection, 'remotesettings_key') or verify_signer_id(collection, 'onecrl_key')
     except KintoException as e:
         if e.response.status_code == 401:
             pytest.fail('blocklists/gfx does not exist')
@@ -150,6 +149,9 @@ def test_certificate_pinning_signatures(env, conf):
 @pytestrail.case('C122566')
 @pytest.mark.settings
 def test_blocklist_timestamp(env, conf):
+    if env == 'prod':
+        pytest.skip('Skipping blocklist timestamp test in production')
+        
     client = Client(
         server_url=conf.get(env, 'reader_server'),
         bucket='blocklists'
