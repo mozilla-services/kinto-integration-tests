@@ -1,4 +1,5 @@
 import configparser
+import os
 import pytest
 import ssl
 
@@ -54,9 +55,15 @@ def apiversion(request):
 
 @pytest.fixture(scope="session")
 def qauser(pytestconfig):
+    if os.getenv('KINTO_QA_LOGIN'):
+        return os.getenv('KINTO_QA_LOGIN')
+
     return pytestconfig.getoption('--qa-collection-user')
 
 
 @pytest.fixture(scope="session")
 def qapasswd(pytestconfig):
+    if os.getenv('KINTO_QA_PASSWD'):
+        return os.getenv('KINTO_QA_PASSWD')
+
     return pytestconfig.getoption("--qa-collection-passwd")
