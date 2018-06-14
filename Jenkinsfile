@@ -6,8 +6,8 @@ pipeline {
     lib('fxtest@1.10')
   }
   environment {
-    PROJECT = "${PROJECT ?: JOB_NAME.split('\\.')[0]}"
-    TEST_ENV = "${TEST_ENV ?: JOB_NAME.split('\\.')[1]}"
+    PROJECT = "${PROJECT ?: JOB_NAME.find('\\.') ? JOB_NAME.split('\\.')[0] : ''}"
+    TEST_ENV = "${TEST_ENV ?: JOB_NAME.find('\\.') ? JOB_NAME.split('\\.')[0] : ''}"
     KINTO_QA = credentials('kintoqa')
     KINTO_DOTENV = credentials('KINTO_DOTENV')
   }
@@ -26,29 +26,64 @@ pipeline {
         sh "flake8"
       }
     }
-    stage('Test kinto-dist') {
-      when {
-        environment name: 'PROJECT', value: 'kinto'
-      }
-      steps {
-        sh "pytest -m dist --env=${TEST_ENV}"
-      }
-    }
-    stage('Test kintowe') {
-      when {
-        environment name: 'PROJECT', value: 'kintowe'
-      }
-      steps {
-        sh "pytest -m webextensions --env=${TEST_ENV}"
-      }
-    }
-    stage('Test kinto-settings') {
-      when {
-        environment name: 'PROJECT', value: 'kinto-settings'
-      }
-      steps {
-        sh "cp ${KINTO_DOTENV} .env"
-        sh "pytest -m settings --env=${TEST_ENV} --qa-collection-user=${KINTO_QA_USR} --qa-collection-passwd=${KINTO_QA_PSW}"
+    stage('Test') {
+      parallel {
+        stage('kinto-dist.stage') {
+          when {
+            anyOf {
+              not { environment name: 'CHANGE_ID', value: '' }
+              allOf {
+                environment name: 'PROJECT', value: 'kinto';
+                environment name: 'TEST_ENV', value: 'stage'
+              }
+            }
+          }
+          steps {
+            sh "pytest -m dist --env=stage"
+          }
+        }
+        stage('kinto-dist.prod') {
+          when {
+            anyOf {
+              not { environment name: 'CHANGE_ID', value: '' }
+              allOf {
+                environment name: 'PROJECT', value: 'kinto';
+                environment name: 'TEST_ENV', value: 'prod'
+              }
+            }
+          }
+          steps {
+            sh "pytest -m dist --env=prod"
+          }
+        }
+        stage('kintowe.stage') {
+          when {
+            anyOf {
+              not { environment name: 'CHANGE_ID', value: '' }
+              allOf {
+                environment name: 'PROJECT', value: 'kintowe';
+                environment name: 'TEST_ENV', value: 'stage'
+              }
+            }
+          }
+          steps {
+            sh "pytest -m webextensions --env=stage"
+          }
+        }
+        stage('kintowe.prod') {
+          when {
+            anyOf {
+              not { environment name: 'CHANGE_ID', value: '' }
+              allOf {
+                environment name: 'PROJECT', value: 'kintowe';
+                environment name: 'TEST_ENV', value: 'prod'
+              }
+            }
+          }
+          steps {
+            sh "pytest -m webextensions --env=prod"
+          }
+        }
       }
     }
   }
