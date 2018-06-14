@@ -46,3 +46,8 @@ Then, you can run the tests like so (substituting your TEST_TYPE and TEST_ENV):
 ```shell
 $ docker run -it kinto-tests pytest -m settings --env=stage
 ```
+
+### Jenkins
+
+These tests will be automatically run on our build server whenever a PR
+is created
