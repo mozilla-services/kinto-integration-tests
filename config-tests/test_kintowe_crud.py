@@ -1,10 +1,7 @@
 import configparser
 import pytest
-import uuid
 from fxa.__main__ import DEFAULT_CLIENT_ID
-from fxa.core import Client as FxaClient
 from fxa.plugins.requests import FxABearerTokenAuth
-from fxa.tests.utils import TestEmailAccount
 from kinto_http import Client
 from pytest_testrail.plugin import pytestrail
 
@@ -18,29 +15,17 @@ def conf():
 
 @pytest.mark.webextensions
 @pytestrail.case('C122566')
-def test_add_content(env, conf):
-    # TODO -- fix this test so it will run in production
+def test_add_content(env, conf, fxa_account, fxa_urls):
     if env == 'prod':
         pytest.skip('qa cannot create records in production')
 
-    acct = TestEmailAccount()
-    email = acct.email
-    passwd = str(uuid.uuid4())
-    fxaclient = FxaClient(conf.get(env, 'account_server_api'))
-    session = fxaclient.create_account(email, passwd)
-    m = acct.wait_for_email(lambda m: "x-verify-code" in m["headers"])
-
-    if m is None:
-        raise RuntimeError("Verification email did not arrive")
-
-    session.verify_email_code(m["headers"]["x-verify-code"])
     auth = FxABearerTokenAuth(
-        email,
-        passwd,
+        fxa_account.email,
+        fxa_account.password,
         scopes=['sync:addon_storage'],
         client_id=DEFAULT_CLIENT_ID,
-        account_server_url=conf.get(env, 'account_server_api'),
-        oauth_server_url=conf.get(env, 'oauth_server_url'),
+        account_server_url=fxa_urls['authentication'],
+        oauth_server_url=fxa_urls['oauth'],
     )
     client = Client(server_url=conf.get(env, 'we_server_url'), auth=auth)
 
@@ -57,7 +42,3 @@ def test_add_content(env, conf):
     client.delete_record(id=new_record_id, collection=conf.get(env, 'qa_collection'))
     updated_records = client.get_records(collection=conf.get(env, 'qa_collection'), bucket='default')
     assert len(updated_records) == len(existing_records)
-
-    # Clean up the account that we created for the test
-    acct.clear()
-    fxaclient.destroy_account(email, passwd)

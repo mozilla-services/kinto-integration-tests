@@ -1,11 +1,8 @@
 import configparser
 import pytest
 import time
-import uuid
 from fxa.__main__ import DEFAULT_CLIENT_ID
-from fxa.core import Client as FxaClient
 from fxa.plugins.requests import FxABearerTokenAuth
-from fxa.tests.utils import TestEmailAccount
 from kinto_http import Client, KintoException
 
 
@@ -17,29 +14,17 @@ def conf():
 
 
 @pytest.mark.webextensions
-def test_delete_request_removes_data(conf, env):
+def test_delete_request_removes_data(conf, env, fxa_account, fxa_urls, fxa_client):
     if env == 'prod':
         pytest.skip('kintowe GDPR tests are not run in production')
 
-    # Create a test user on FxA
-    acct = TestEmailAccount()
-    email = acct.email
-    passwd = str(uuid.uuid4())
-    fxaclient = FxaClient(conf.get(env, 'account_server_api'))
-    session = fxaclient.create_account(email, passwd)
-    m = acct.wait_for_email(lambda m: "x-verify-code" in m["headers"])
-
-    if m is None:
-        raise RuntimeError("Verification email did not arrive")
-
-    session.verify_email_code(m["headers"]["x-verify-code"])
     auth = FxABearerTokenAuth(
-        email,
-        passwd,
+        fxa_account.email,
+        fxa_account.password,
         scopes=['sync:addon_storage'],
         client_id=DEFAULT_CLIENT_ID,
-        account_server_url=conf.get(env, 'account_server_api'),
-        oauth_server_url=conf.get(env, 'oauth_server_url'),
+        account_server_url=fxa_urls['authentication'],
+        oauth_server_url=fxa_urls['oauth'],
     )
 
     # Add some data to chrome.storage (kintowe)
@@ -69,8 +54,7 @@ def test_delete_request_removes_data(conf, env):
     assert resp['data']['id'] == we_record_id
 
     # Delete FxA account
-    acct.clear()
-    fxaclient.destroy_account(email, passwd)
+    fxa_client.destroy_account(fxa_account.email, fxa_account.password)
 
     # Wait 1 minute and then make sure the records do not exist because the
     # Kinto client will throw an exception for non-existent records
