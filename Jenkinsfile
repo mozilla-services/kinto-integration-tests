@@ -12,7 +12,7 @@ pipeline {
     KINTO_DOTENV = credentials('KINTO_DOTENV')
   }
   triggers {
-    pollSCM(env.BRANCH_NAME == 'master' ? 'H/30 * * * *' : '')
+    pollSCM(env.BRANCH_NAME == 'master' ? 'H/5 * * * *' : '')
     cron(env.BRANCH_NAME == 'master' ? 'H * * * *' : '')
   }
   options {
