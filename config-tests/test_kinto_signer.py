@@ -55,7 +55,6 @@ def test_addons_signatures(env, conf):
         if len(records) == 0:
             pytest.skip('blocklists/addons has no records')
         assert verify_signatures(collection, records, timestamp)
-        print(collection)
         assert verify_signer_id(collection, 'onecrl_key') or verify_signer_id(collection, 'remotesettings_key')
     except KintoException as e:
         if e.response.status_code == 401:
@@ -75,7 +74,6 @@ def test_plugins_signatures(env, conf):
         collection, records, timestamp = get_collection_data(client)
         if len(records) == 0:
             pytest.skip('blocklists/plugins has no records')
-        print(collection)
         assert verify_signatures(collection, records, timestamp)
         assert verify_signer_id(collection, 'remotesettings_key')
     except KintoException as e:
