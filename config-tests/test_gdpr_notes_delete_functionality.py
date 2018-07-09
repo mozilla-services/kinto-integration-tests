@@ -44,7 +44,6 @@ def test_delete_request_removes_data(conf, env, fxa_account, fxa_urls, fxa_clien
     # Get the aliases of the bucket we are putting data in and
     # make sure that an unauthenticated user can see these records
     # before we delete the account
-    print(tp_client.server_info()["user"])
     tp_bucket_id = tp_client.server_info()["user"]["bucket"]
     anon_tp_client = Client(server_url=conf.get(env, 'tp_server_url'))
     resp = anon_tp_client.get_record(

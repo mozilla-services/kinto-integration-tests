@@ -1,3 +1,4 @@
+import kinto_http
 import pytest
 import requests
 from random import randint

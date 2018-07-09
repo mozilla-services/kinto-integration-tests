@@ -16,8 +16,9 @@ pytest-testrail = "==1.1.5"
 smwogger = "==1.0"
 pytest-asyncio = "==0.8.0"
 pyfxa = "==0.6.0"
-flake8 = "==3.5.0"
+"flake8" = "==3.5.0"
 pytest-fxa = "*"
+idna-ssl = "*"
 
 
 [dev-packages]
