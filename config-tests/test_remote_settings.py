@@ -75,3 +75,7 @@ def test_create_collection_in_main_bucket(conf, env):
         id=collection,
         data={"status": "to-sign"}
     )
+
+    # Now clean up all the records we created
+    dc_response = client.delete_collection(id=collection, bucket='main-workspace')
+    assert dc_response['deleted'] is True
