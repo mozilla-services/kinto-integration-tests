@@ -79,3 +79,16 @@ def test_create_collection_in_main_bucket(conf, env):
     # Now clean up all the records we created
     dc_response = client.delete_collection(id=collection, bucket='main-workspace')
     assert dc_response['deleted'] is True
+
+    dc_response = client.delete_collection(id=collection, bucket='main-preview')
+    assert dc_response['deleted'] is True
+
+    dc_response = client.delete_collection(id=collection, bucket='main')
+    assert dc_response['deleted'] is True
+
+    editor_group = '{0}-editors'.format(collection)
+    reviewers_group = '{0}-reviewers'.format(collection)
+    dg_response = client.delete_group(id=editor_group, bucket='main-workspace')
+    assert dg_response['deleted'] is True
+    dg_response = client.delete_group(id=reviewers_group, bucket='main-workspace')
+    assert dg_response['deleted'] is True
