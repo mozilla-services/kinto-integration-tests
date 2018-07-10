@@ -75,3 +75,15 @@ def test_create_collection_in_main_bucket(conf, env):
         id=collection,
         data={"status": "to-sign"}
     )
+
+    # Now clean up all the records we created
+    for bucket in ['main-workspace', 'main-preview', 'main']:
+        dc_response = client.delete_collection(id=collection, bucket=bucket)
+        assert dc_response['deleted'] is True
+
+    editors_group = '{0}-editors'.format(collection)
+    reviewers_group = '{0}-reviewers'.format(collection)
+    dg_response = client.delete_group(id=editors_group, bucket='main-workspace')
+    assert dg_response['deleted'] is True
+    dg_response = client.delete_group(id=reviewers_group, bucket='main-workspace')
+    assert dg_response['deleted'] is True
