@@ -1,3 +1,7 @@
+#!/usr/bin/env groovy
+
+def branch = env.BRANCH_NAME ?: 'master'
+
 pipeline {
   agent {
     dockerfile true
@@ -12,8 +16,8 @@ pipeline {
     KINTO_DOTENV = credentials('KINTO_DOTENV')
   }
   triggers {
-    pollSCM(env.BRANCH_NAME == 'master' ? 'H/5 * * * *' : '')
-    cron(env.BRANCH_NAME == 'master' ? 'H H * * *' : '')
+    pollSCM(branch == 'master' ? 'H/5 * * * *' : '')
+    cron(branch == 'master' ? 'H H * * *' : '')
   }
   options {
     ansiColor('xterm')
