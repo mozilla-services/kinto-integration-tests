@@ -1,5 +1,6 @@
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/Kinto/kinto-integration-tests/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/License-Mozillia%202.0-blue.svg)](https://github.com/Kinto/kinto-integration-tests/blob/master/LICENSE)
 [![travis](https://img.shields.io/travis/Kinto/kinto-integration-tests.svg?label=travis)](http://travis-ci.org/Kinto/kinto-integration-tests/)
+[![Dependabot](https://api.dependabot.com/badges/status?host=github&repo=Kint/kinto-integration-tests)](https://dependabot.com)
 
 # Summary
 Tests for the Kinto server fall into 3 categories:
