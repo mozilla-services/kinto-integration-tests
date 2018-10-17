@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "15f345f49d80e4af648be38c2b417727bd310dbb01ce47ad6fbbed12f41eda26"
+            "sha256": "e9115c0f2816b0e32fbb8c23a3234ff8df4a0cf209a1dcfd5885bbfd8ad576e2"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -54,14 +54,6 @@
                 "sha256:9d5c20441baf0cb60a4ac34cc447c6c189024b6b4c6cd7877034f4965c464e49"
             ],
             "version": "==0.24.0"
-        },
-        "async-generator": {
-            "hashes": [
-                "sha256:01c7bf666359b4967d2cda0000cc2e4af16a0ae098cbffcb8472fb9e8ad6585b",
-                "sha256:6ebb3d106c12920aaae42ccb6f787ef5eefdcdd166ea3d628fa8476abe712144"
-            ],
-            "markers": "python_version == '3.5'",
-            "version": "==1.10"
         },
         "async-timeout": {
             "hashes": [
@@ -266,6 +258,7 @@
                 "sha256:7253265f7abd8b313e3892944044a365e3f4ac3fcdcfb4298f55ee9ddf188ba0",
                 "sha256:c7841163e2b576d435799169b78703ad6ac1bbb0f199994fc05f700b2a90ea37"
             ],
+            "index": "pypi",
             "version": "==3.5.0"
         },
         "hawkauthlib": {
@@ -293,7 +286,7 @@
             "hashes": [
                 "sha256:a933e3bb13da54383f9e8f35dc4f9cb9eb9b3b78c6b36f311254d6d0d92c6c7c"
             ],
-            "markers": "python_version < '3.7'",
+            "index": "pypi",
             "version": "==1.1.0"
         },
         "iso8601": {
@@ -351,13 +344,15 @@
                 "sha256:3d48894ab63225f8ba096a706c16d533926ac643bb6a8913b7af2f3a08d8496e",
                 "sha256:59ada2f851175f3cf9f533aaab3c2d7c883372e9c4e6bb3e4e23b85bed776af5"
             ],
+            "index": "pypi",
             "version": "==10.0.0"
         },
         "kinto-signer": {
             "hashes": [
-                "sha256:e67f9eea0f4433c2c861c2caf279c3d35c4e9a9aed2f0e64d6dad516b7c7baeb"
+                "sha256:8bb766a20e8f386dfcc81d9e7d4c40c5972a94e93e4f18728767b6c16850c336"
             ],
-            "version": "==3.3.2"
+            "index": "pypi",
+            "version": "==3.3.3"
         },
         "logging-color-formatter": {
             "hashes": [
@@ -500,6 +495,7 @@
                 "sha256:d511b6f43a9445587c609a138636d378de76661561116e1f4259fcec9d09b42b",
                 "sha256:e37149cf27e26eed2b321389d313c876ffbbdd7868ec7f0694a8989847b9c8da"
             ],
+            "index": "pypi",
             "version": "==0.6.0"
         },
         "pyramid": {
@@ -507,6 +503,7 @@
                 "sha256:600f12e0d11211a55c2da970120af33214f77607ed45caba6af6c891afeaa771",
                 "sha256:cf89a48cb899291639686bf3d4a883b39e496151fa4871fb83cc1a3200d5b925"
             ],
+            "index": "pypi",
             "version": "==1.9.2"
         },
         "pyramid-multiauth": {
@@ -528,6 +525,7 @@
                 "sha256:10e59f84267370ab20cec9305bafe7505ba4d6b93ecbf66a1cce86193ed511d5",
                 "sha256:8c827e7d4816dfe13e9329c8226aef8e6e75d65b939bc74fda894143b6d1df59"
             ],
+            "index": "pypi",
             "version": "==3.9.1"
         },
         "pytest-asyncio": {
@@ -535,6 +533,7 @@
                 "sha256:a962e8e1b6ec28648c8fe214edab4e16bacdb37b52df26eb9d63050af309b2a9",
                 "sha256:fbd92c067c16111174a1286bfb253660f1e564e5146b39eeed1133315cf2c2cf"
             ],
+            "index": "pypi",
             "version": "==0.9.0"
         },
         "pytest-fxa": {
@@ -542,12 +541,14 @@
                 "sha256:778dfdb019f1e0af8744704fe5f7ac5c08fd5d45ff054023b0a18d5f99d737f1",
                 "sha256:b75967e74e9b2f3ffa5558421fdf61c7fff5948fc9d7e357e7147c682988ecc1"
             ],
+            "index": "pypi",
             "version": "==1.4.0"
         },
         "pytest-testrail": {
             "hashes": [
                 "sha256:4b4a3a892419b1ce1bbdfd093680d9f6b77efde60181f7294093270bac4e04fe"
             ],
+            "index": "pypi",
             "version": "==1.1.6"
         },
         "python-dateutil": {
@@ -586,6 +587,7 @@
                 "sha256:63b52e3c866428a224f97cab011de738c36aec0185aa91cfacd418b5d58911d1",
                 "sha256:ec22d826a36ed72a7358ff3fe56cbd4ba69dd7a6718ffd450ff0e9df7a47ce6a"
             ],
+            "index": "pypi",
             "version": "==2.19.1"
         },
         "requests-hawk": {
@@ -630,6 +632,7 @@
             "hashes": [
                 "sha256:15ad0ed73014edc1d3af2fc6c59de7d49829a040509b1d46329307ddc845f1f9"
             ],
+            "index": "pypi",
             "version": "==1.0"
         },
         "swagger-parser": {
