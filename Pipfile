@@ -7,7 +7,7 @@ name = "pypi"
 
 [packages]
 
-requests = "==2.19.1"
+requests = "==2.20.0"
 pytest = "==3.9.1"
 kinto-signer = "==3.3.3"
 pyramid = "==1.9.2"
