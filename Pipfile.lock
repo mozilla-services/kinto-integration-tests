@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3b7852c46e4af57b4dc712a2a0e93b67a24b7077fef1f1e5dd453894d07aed14"
+            "sha256": "0b2f12dbadaeb1c7e806d7495ec96cd91cae444a9d523cd63a3c4d5d06221d3c"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -501,11 +501,11 @@
         },
         "pyramid": {
             "hashes": [
-                "sha256:600f12e0d11211a55c2da970120af33214f77607ed45caba6af6c891afeaa771",
-                "sha256:cf89a48cb899291639686bf3d4a883b39e496151fa4871fb83cc1a3200d5b925"
+                "sha256:3f91bcb8ee8ad3168eaf836d701b7b8c59481cec9ca085ab0251d1b953ffc46a",
+                "sha256:e3cf837472c7c9acbd3a4169421a5b61ca79569054aacc1c3836274668015290"
             ],
             "index": "pypi",
-            "version": "==1.9.2"
+            "version": "==1.10"
         },
         "pyramid-multiauth": {
             "hashes": [
@@ -575,13 +575,6 @@
                 "sha256:e170a9e6fcfd19021dd29845af83bb79236068bf5fd4df3327c1be18182b2531"
             ],
             "version": "==3.13"
-        },
-        "repoze.lru": {
-            "hashes": [
-                "sha256:0429a75e19380e4ed50c0694e26ac8819b4ea7851ee1fc7583c8572db80aff77",
-                "sha256:f77bf0e1096ea445beadd35f3479c5cff2aa1efe604a133e67150bc8630a62ea"
-            ],
-            "version": "==0.7"
         },
         "requests": {
             "hashes": [
