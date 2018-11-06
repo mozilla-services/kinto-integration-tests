@@ -9,7 +9,7 @@ name = "pypi"
 
 requests = "==2.20.0"
 pytest = "==3.9.3"
-kinto-signer = "==3.3.4"
+kinto-signer = "==3.3.5"
 pyramid = "==1.10"
 kinto-http = "==10.1.0"
 pytest-testrail = "==2.3.1"
