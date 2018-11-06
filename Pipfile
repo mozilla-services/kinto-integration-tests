@@ -8,7 +8,7 @@ name = "pypi"
 [packages]
 
 requests = "==2.20.0"
-pytest = "==3.9.3"
+pytest = "==3.10.0"
 kinto-signer = "==3.3.5"
 pyramid = "==1.10"
 kinto-http = "==10.1.0"
