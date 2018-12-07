@@ -1,6 +1,5 @@
 import pytest
 from pyramid.compat import string_types
-from pytest_testrail.plugin import pytestrail
 import requests
 
 
@@ -55,7 +54,6 @@ def test_version(conf, env, api_url):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
-@pytestrail.case('C122558')
 def test_heartbeat(conf, env, api_url):
     res = requests.get(api_url + '__heartbeat__')
     data = res.json()
@@ -73,7 +71,6 @@ def test_heartbeat(conf, env, api_url):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
-@pytestrail.case('C122559')
 def test_server_info(conf, env, api_url):
     res = requests.get(api_url)
     data = res.json()
@@ -89,7 +86,6 @@ def test_server_info(conf, env, api_url):
 @pytest.mark.dist
 @pytest.mark.settings
 @pytest.mark.webextensions
-@pytestrail.case('C122560')
 def test_contribute(conf, env, api_url):
     res = requests.get(api_url + 'contribute.json')
     data = res.json()

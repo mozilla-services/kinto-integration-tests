@@ -3,7 +3,6 @@ import pytest
 from fxa.__main__ import DEFAULT_CLIENT_ID
 from fxa.plugins.requests import FxABearerTokenAuth
 from kinto_http import Client
-from pytest_testrail.plugin import pytestrail
 
 
 @pytest.fixture
@@ -14,7 +13,6 @@ def conf():
 
 
 @pytest.mark.webextensions
-@pytestrail.case('C122566')
 def test_add_content(env, conf, fxa_account, fxa_urls):
     if env == 'prod':
         pytest.skip('qa cannot create records in production')

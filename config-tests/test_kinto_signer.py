@@ -7,7 +7,6 @@ import requests
 from kinto_signer.serializer import canonical_json
 from kinto_signer.signer.local_ecdsa import ECDSASigner
 from kinto_http import Client, KintoException
-from pytest_testrail.plugin import pytestrail
 
 
 @pytest.fixture
@@ -42,7 +41,6 @@ def verify_signatures(collection, records, timestamp):
         return 0
 
 
-@pytestrail.case('C122561')
 @pytest.mark.settings
 def test_addons_signatures(env, conf):
     client = Client(
@@ -62,7 +60,6 @@ def test_addons_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C122562')
 @pytest.mark.settings
 def test_plugins_signatures(env, conf):
     client = Client(
@@ -82,7 +79,6 @@ def test_plugins_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C122563')
 @pytest.mark.settings
 def test_gfx_signatures(env, conf):
     client = Client(
@@ -102,7 +98,6 @@ def test_gfx_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C122564')
 @pytest.mark.settings
 def test_certificates_signatures(env, conf):
     client = Client(
@@ -123,7 +118,6 @@ def test_certificates_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C122565')
 @pytest.mark.settings
 def test_certificate_pinning_signatures(env, conf):
     client = Client(
@@ -144,7 +138,6 @@ def test_certificate_pinning_signatures(env, conf):
         pytest.fail('Something went wrong: %s %s' % (e.response.status_code, e.response))
 
 
-@pytestrail.case('C122566')
 @pytest.mark.settings
 def test_blocklist_timestamp(env, conf):
     if env == 'prod':
