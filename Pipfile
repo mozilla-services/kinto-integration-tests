@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-requests = "==2.20.1"
+requests = "==2.21.0"
 pytest = "==4.0.1"
 kinto-signer = "==3.3.8"
 pyramid = "==1.10.1"
