@@ -5,4 +5,4 @@ COPY Pipfile pipenv.txt /app/
 RUN pip install -r pipenv.txt
 RUN pipenv install --system --skip-lock
 COPY . /app
-CMD pytest --env=$TEST_ENV
+CMD pytest -m $TEST_TYPE --env=$TEST_ENV
