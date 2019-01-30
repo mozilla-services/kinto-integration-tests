@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "23b3cf6b7d931d56ce47edacb2a59a0d0f33e56608b040ed22d24ed6ec2d7ffe"
+            "sha256": "3542fe2b033a77d0f8762f10abc88a1947957fd422726e822805feb5fad7df57"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -247,11 +247,11 @@
         },
         "flake8": {
             "hashes": [
-                "sha256:545c8faa8425cafcd9800538b4fa324a543cdec0ac273cf698ddd6a954123401",
-                "sha256:e9ca1bb84d76511315e565a2cdd292d916b08b0d639aa3e323d8c7d895a03897"
+                "sha256:0323db2e3a72faa2c4cdd61ea87594b9cb343fc4dfa5c24d6b43059d7ba29d0e",
+                "sha256:a7951ade4814e5e5364bdce1e73862cbacf2bbb9b509a9bf8c130a0414cf0722"
             ],
             "index": "pypi",
-            "version": "==3.7.1"
+            "version": "==3.7.2"
         },
         "hawkauthlib": {
             "hashes": [
