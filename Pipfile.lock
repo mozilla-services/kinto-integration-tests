@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "23b3cf6b7d931d56ce47edacb2a59a0d0f33e56608b040ed22d24ed6ec2d7ffe"
+            "sha256": "d9c7412b0f829177840522e2844233eba5bea758553b114d6045686775b8a852"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -167,10 +167,10 @@
         },
         "colander": {
             "hashes": [
-                "sha256:2358303aa04cca0e1865323ce253e65d25f6307d12bade89dbe1aa4e60197d4b",
-                "sha256:d86b9e1fb42c80c68b26040e32dad584aa168abf3175133b36f5dace392350a1"
+                "sha256:121d57ccaa17a3f035aeba74488305837ae758ec5b66b4d6a48fa140f262f974",
+                "sha256:481d6f68409d83b65637b7e7d7c5482c3559b2e64ef6c8c743d14ec9d66eecbf"
             ],
-            "version": "==1.5.1"
+            "version": "==1.6.0"
         },
         "colorama": {
             "hashes": [
@@ -247,11 +247,11 @@
         },
         "flake8": {
             "hashes": [
-                "sha256:545c8faa8425cafcd9800538b4fa324a543cdec0ac273cf698ddd6a954123401",
-                "sha256:e9ca1bb84d76511315e565a2cdd292d916b08b0d639aa3e323d8c7d895a03897"
+                "sha256:806ec5785af23b4d9f3224a47cdd73714528923fccc95cc13cb1b74ba19c1820",
+                "sha256:b70f13ee944e536f22becfd716802b1f2fa4ca5ff7aea2c6423567569004f732"
             ],
             "index": "pypi",
-            "version": "==3.7.1"
+            "version": "==3.7.3"
         },
         "hawkauthlib": {
             "hashes": [

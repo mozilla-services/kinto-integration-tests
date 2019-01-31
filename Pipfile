@@ -11,7 +11,7 @@ pyramid = "==1.10.1"
 kinto-http = "==10.1.1"
 smwogger = "==1.0"
 pyfxa = "==0.6.0"
-flake8 = "==3.7.1"
+flake8 = "==3.7.3"
 pytest-fxa = "*"
 idna-ssl = "*"
 
