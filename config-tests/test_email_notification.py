@@ -4,11 +4,10 @@ from random import randint
 
 
 @pytest.mark.settings
-@pytest.mark.skipif(
-    pytest.config.getoption('env') != 'stage',
-    reason='Test only runs on staging'
-)
-def test_email_notifications_work(env, conf, qauser, qapasswd):
+def test_email_notifications_work(env, conf, qauser, qapasswd, request):
+    if request.config.getoption('env') != 'stage':
+        pytest.skip('Test only runs on STAGE')
+
     url = conf.get(env, 'qa_collection_url')
     auth = (qauser, qapasswd)
 
