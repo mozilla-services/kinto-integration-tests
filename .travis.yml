@@ -4,7 +4,6 @@ python:
 install:
   - pip install -r pipenv.txt
 script:
-  - pipenv check
   - pipenv sync
   - pipenv run flake8
 notifications:
