@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "fde645dbe8c2ab1c09eb51da88e814346831859f4cfcecd17ab9f1090a8ad466"
+            "sha256": "b233aa7baa58af7675377f457eb9caaf69112e3c2ee5d22273432ee5dfd28905"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -329,11 +329,11 @@
         },
         "kinto-http": {
             "hashes": [
-                "sha256:aa5ceb9d98093c6d0aa5b89af11221f5f6be8f51e6871e0626fd2a6e492934b1",
-                "sha256:ceea5cad51a7cffb4fa0474ec4ef611f01805443b81cc3034e96b95985a51b83"
+                "sha256:b2ac0f716a05e7645be6ca1dbdf4f7a2704dfc8743d58aa8ddc5f1b8a12730f5",
+                "sha256:ffaa9a81b3def3707eb05780f1d66f16c71ac0a21a34de7e21f16236ad0564dc"
             ],
             "index": "pypi",
-            "version": "==10.1.1"
+            "version": "==10.3.0"
         },
         "kinto-signer": {
             "hashes": [
