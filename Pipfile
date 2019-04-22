@@ -14,7 +14,8 @@ pyfxa = "==0.7.1"
 flake8 = "==3.7.7"
 pytest-fxa = "*"
 idna-ssl = "*"
-numpy = "==1.16.2"
+numpy = "*"
 pyyaml = "*"
+pytest-asyncio = "==0.10.0"
 
 [dev-packages]
