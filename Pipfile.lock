@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "749078691e79b7c38dfd8ebfa631cc70737efe291f474d02268bba8e9dfde7d6"
+            "sha256": "6f1728ee8baa2722edb58606d0257dd9c0df30cbc3bc54c2df1d457d00055806"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -338,11 +338,11 @@
         },
         "kinto-signer": {
             "hashes": [
-                "sha256:753e21e4196b0c5f4472f1e29ae04951f42e4241153f057b73d7d0d62ecd0fc1",
-                "sha256:d6df05cf2f63c286e736188502f6735e351c21d7c6d787ef5dfdd775fa984692"
+                "sha256:12729c2b9857a6a7ad8320438168faa2f9c6c44e68967e7d5016a79825de9c7c",
+                "sha256:df3e51fe82149aa83b3ce3d110a63f2eba125951bcca3229897a12c1ffdcf560"
             ],
             "index": "pypi",
-            "version": "==5.0.0"
+            "version": "==5.0.1"
         },
         "logging-color-formatter": {
             "hashes": [
