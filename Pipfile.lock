@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7bdf9ed70579c034e1fd9e5026d7b65791c9cb5c1aa9d76f31a7da7ee4028d72"
+            "sha256": "1abbb747e59d68bdd8579f5fe6971aa67b42725629ed5f93ae066fe8dbd741c1"
         },
         "pipfile-spec": 6,
         "requires": {},
@@ -90,17 +90,17 @@
         },
         "boto3": {
             "hashes": [
-                "sha256:5ff78c697d8009b9fe9808baea60660f0a07be666fb7c65fc4c11756f568124e",
-                "sha256:d01314496080ac82ddff3d1b2c6ad542d89bfcb100b7a0e8aaf2d6aef99775c6"
+                "sha256:0895805810df8cc49898fbeb61479c20c63a59fb6d3adf19f78fde90efec10a2",
+                "sha256:2f174f1e01d898ed940677a66404b7d30cbe92665b1fa2a5086eb64382ce2c41"
             ],
-            "version": "==1.9.239"
+            "version": "==1.9.240"
         },
         "botocore": {
             "hashes": [
-                "sha256:14ff881779776a5b08e4bb8d7e0cd6ca86e36fc80decc536d605c406fb81c993",
-                "sha256:5df4a8f8bb579daed58368d6c15cdd72455bfee7dc86be243e2ef4dff5ba1177"
+                "sha256:040f5307387481501bf2db02dc55c6512553081b43642578687fc47ed8ec990b",
+                "sha256:7d30b4cc9546a126ccdc9d325a1c02d7f63ff3759b80c9e1f15fd544785e22a1"
             ],
-            "version": "==1.12.239"
+            "version": "==1.12.240"
         },
         "certifi": {
             "hashes": [
@@ -322,11 +322,11 @@
         },
         "kinto-http": {
             "hashes": [
-                "sha256:a516ef084cafdd7779a7ddd0eec0c98bde466a58c6e6a6ee1792eddd1b6c3481",
-                "sha256:c025b95f99432bb403a4ca842cb0b68ba5b4f95b54e21f16fc1b3af2c702dd53"
+                "sha256:9b5695bb28a3c31531dbe19fb9ea08e66e86cf039b76662261626fc3dfd0be4d",
+                "sha256:d1c000788ad811bb496b8880cf99b4c35c565add5dc8f1180d6ef08772a390b8"
             ],
             "index": "pypi",
-            "version": "==10.5.0"
+            "version": "==10.6.0"
         },
         "kinto-signer": {
             "hashes": [
