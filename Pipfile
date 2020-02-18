@@ -5,7 +5,7 @@ name = "pypi"
 
 [packages]
 requests = "==2.22.0"
-pytest = "==5.3.2"
+pytest = "==5.3.5"
 kinto-signer = "==6.0.2"
 pyramid = "==1.10.4"
 kinto-http = "==10.7.0"
