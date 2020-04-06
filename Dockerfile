@@ -1,5 +1,5 @@
 FROM python:alpine
-RUN apk add --update make gcc python3-dev musl-dev libffi-dev openssl openssl-dev
+RUN apk add --update make gcc g++ python3-dev musl-dev libffi-dev openssl openssl-dev
 WORKDIR /app
 COPY Pipfile pipenv.txt /app/
 RUN pip install -r pipenv.txt
