@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  lint:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+
+      - run: |
+        pip install -r pipenv.txt
+        pipenv sync
+        pipenv run flake8
+
+workflows:
+  version: 2
+  main:
+    jobs:
+      - lint:
