@@ -6,13 +6,20 @@ jobs:
     steps:
       - checkout
 
-      - run: |
-        pip install -r pipenv.txt
-        pipenv sync
-        pipenv run flake8
+      - run:
+          name: Install pipenv
+          command: pip install -r pipenv.txt
+
+      - run:
+          name: Install dependencies
+          command: pipenv sync
+
+      - run:
+          name: Lint
+          command: pipenv run flake8
 
 workflows:
   version: 2
   main:
     jobs:
-      - lint:
+      - lint
