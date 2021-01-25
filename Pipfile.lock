@@ -303,14 +303,6 @@
             "index": "pypi",
             "version": "==10.7.0"
         },
-        "kinto-signer": {
-            "hashes": [
-                "sha256:73521a1a4ec2eacd2788ae3bb4bdcab8893b376496a94b76e4cb0c4c17a2deb8",
-                "sha256:b94396c581138c905eb2bf0601725163a547a4b4357b3bbb001012ab0ab05a87"
-            ],
-            "index": "pypi",
-            "version": "==6.1.0"
-        },
         "logging-color-formatter": {
             "hashes": [
                 "sha256:a115c04ebd0be5dc511f71a44dbad531e5b7cb91b91d3924982d69dff0333ad4"
