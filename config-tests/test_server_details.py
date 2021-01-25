@@ -1,11 +1,10 @@
 import pytest
-from pyramid.compat import string_types
 import requests
 
 
 def aslist_cronly(value):
     """ Split the input on lines if it's a valid string type"""
-    if isinstance(value, string_types):
+    if isinstance(value, str):
         value = filter(None, [x.strip() for x in value.splitlines()])
     return list(value)
 
