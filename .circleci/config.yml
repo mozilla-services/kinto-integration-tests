@@ -7,16 +7,16 @@ jobs:
       - checkout
 
       - run:
-          name: Install pipenv
-          command: pip install -r pipenv.txt
+          name: Install Poetry
+          command: pip install poetry
 
       - run:
-          name: Install dependencies
-          command: pipenv sync
+          name: Install Dependencies
+          command: poetry install
 
       - run:
           name: Lint
-          command: pipenv run flake8
+          command: poetry run flake8
 
 workflows:
   version: 2
