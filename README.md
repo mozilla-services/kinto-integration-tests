@@ -18,7 +18,7 @@ API tests, config and URL checks, deployment tests, end-2-end tests, security te
 To run the tests, you need to have the following installed:
 
 * Python 3.6 or greater
-* [Pipenv](https://pipenv.readthedocs.io/en/latest/)
+* [Poetry](https://python-poetry.org/)
 
 
 ## Running the tests
@@ -26,8 +26,7 @@ To run the tests, you need to have the following installed:
 You can run these tests using the following commands from inside the root directory for the project:
 
 ```shell
-$ pipenv install
-$ pipenv run pytest -m TEST_TYPE --env TEST_ENV
+$ poetry run pytest -m TEST_TYPE --env TEST_ENV
 ```
 
 * `TEST_TYPE` is `dist` for `kinto-dist` deployments, `settings` for `kinto-settings` deployments and `webextensions` for `kintowe` deployments

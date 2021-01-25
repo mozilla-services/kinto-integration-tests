@@ -8,4 +8,4 @@ __pycache__/
 *.sw[op]
 records.json
 mail/
-venv/
+.pytest_cache
