@@ -11,6 +11,10 @@ jobs:
           command: pip install poetry
 
       - run:
+          name: Install Dependencies
+          command: poetry install
+
+      - run:
           name: Lint
           command: poetry run flake8
 
