@@ -40,14 +40,10 @@ def api_url(conf, env, request):
 @pytest.mark.webextensions
 def test_version(conf, env, api_url):
     data = requests.get(api_url + '__version__').json()
-    expected_fields = aslist(conf.get(env, 'version_fields'))
+    fields = set(data.keys())
+    expected_fields = {"source", "commit", "version", "build"}
 
-    for key in data:
-        assert key in expected_fields
-
-    # Then make the we only have the expected fields in the data
-    for field in expected_fields:
-        assert field in data
+    assert len(fields ^ expected_fields) == 0
 
 
 @pytest.mark.dist
@@ -56,15 +52,10 @@ def test_version(conf, env, api_url):
 def test_heartbeat(conf, env, api_url):
     res = requests.get(api_url + '__heartbeat__')
     data = res.json()
-    expected_fields = aslist(conf.get(env, 'heartbeat_fields'))
+    fields = set(data.keys())
+    expected_fields = set(aslist(conf.get(env, 'heartbeat_fields')))
 
-    # First, make sure that data only contains fields we expect
-    for key in data:
-        assert key in expected_fields
-
-    # Then make the we only have the expected fields in the data
-    for field in expected_fields:
-        assert field in data
+    assert len(fields ^ expected_fields) == 0
 
 
 @pytest.mark.dist
@@ -73,13 +64,13 @@ def test_heartbeat(conf, env, api_url):
 def test_server_info(conf, env, api_url):
     res = requests.get(api_url)
     data = res.json()
-    expected_fields = aslist(conf.get(env, 'server_info_fields'))
+    fields = set(data.keys())
+    expected_fields = {
+        "url", "project_docs", "project_name", "capabilities",
+        "project_version", "settings", "http_api_version"
+    }
 
-    for key in data:
-        assert key in expected_fields
-
-    for field in expected_fields:
-        assert field in data
+    assert len(fields ^ expected_fields) == 0
 
 
 @pytest.mark.dist
@@ -88,10 +79,10 @@ def test_server_info(conf, env, api_url):
 def test_contribute(conf, env, api_url):
     res = requests.get(api_url + 'contribute.json')
     data = res.json()
-    expected_fields = aslist(conf.get(env, 'contribute_fields'))
+    fields = set(data.keys())
+    expected_fields = {
+        "keywords", "participate", "repository",
+        "description", "urls", "name",
+    }
 
-    for key in data:
-        assert key in expected_fields
-
-    for field in expected_fields:
-        assert field in data
+    assert len(fields ^ expected_fields) == 0

@@ -18,12 +18,6 @@ def pytest_addoption(parser):
     )
 
     parser.addoption(
-        "--api-version",
-        dest="apiversion",
-        help="Optional param: version of API under test"
-    )
-
-    parser.addoption(
         "--qa-collection-user",
         dest="qauser",
         help="Optional param: user who can access QA collection in staging"
@@ -46,11 +40,6 @@ def conf():
 @pytest.fixture(scope="module")
 def env(request):
     return request.config.getoption("--env")
-
-
-@pytest.fixture(scope="module")
-def apiversion(request):
-    return request.config.getoption("--api-version")
 
 
 @pytest.fixture(scope="session")
