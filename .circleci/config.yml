@@ -31,19 +31,15 @@ jobs:
           command: docker build -t app:build .
 
   integration_test:
-    docker:
-      - image: circleci/python:3.8
+    machine:
+      image: ubuntu-2004:202010-01
     steps:
       - checkout
-
-      - setup_remote_docker
 
       - run:
           name: Run and test
           command: |
             mkdir --mode=777 attachments && \
-            ls -lah && \
-            ls -lah `pwd`/. && \
             docker run -v `pwd`/server.ini:/etc/kinto.ini \
                        -v `pwd`/attachments:/tmp/attachments \
                        -e KINTO_INI=/etc/kinto.ini \
