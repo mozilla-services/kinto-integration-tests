@@ -40,7 +40,8 @@ jobs:
           name: Run and test
           command: |
             mkdir --mode=777 attachments && \
-            docker run -v `pwd`/server.ini:/etc/kinto.ini \
+            docker run --detach \
+                       -v `pwd`/server.ini:/etc/kinto.ini \
                        -v `pwd`/attachments:/tmp/attachments \
                        -e KINTO_INI=/etc/kinto.ini \
                        -p 8888:8888 \
