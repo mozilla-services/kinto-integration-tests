@@ -51,6 +51,9 @@ def test_version(conf, env, api_url):
 @pytest.mark.webextensions
 def test_heartbeat(conf, env, api_url):
     res = requests.get(api_url + '__heartbeat__')
+
+    assert res.status_code == 200
+
     data = res.json()
     fields = set(data.keys())
     expected_fields = set(aslist(conf.get(env, 'heartbeat_fields')))
