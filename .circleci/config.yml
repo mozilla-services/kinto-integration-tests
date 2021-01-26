@@ -26,7 +26,7 @@ jobs:
 
       - run:
           name: Run local Autograh
-          command: docker run --rm --name autograph-server mozilla/autograph
+          command: docker run --detach --name autograph-server mozilla/autograph
 
       - run:
           name: Run local Kinto
