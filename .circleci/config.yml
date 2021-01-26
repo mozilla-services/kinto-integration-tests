@@ -18,8 +18,21 @@ jobs:
           name: Lint
           command: poetry run flake8
 
+  build_container:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Build container image
+          command: docker build -t app:build .
+
 workflows:
   version: 2
   main:
     jobs:
       - lint
+      - build_container
