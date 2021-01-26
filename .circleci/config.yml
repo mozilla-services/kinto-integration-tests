@@ -30,9 +30,30 @@ jobs:
           name: Build container image
           command: docker build -t app:build .
 
+  integration_test:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Run and test
+          command: |
+            mkdir --mode=777 attachments && \
+            docker run -v `pwd`/server.ini:/etc/kinto.ini \
+                       -v `pwd`/attachments:/tmp/attachments \
+                       -e KINTO_INI=/etc/kinto.ini \
+                       -p 8888:8888 \
+                       mozilla/kinto-dist && \
+            curl --retry 10 --retry-delay 1 --retry-connrefused http://0.0.0.0:8888/v1/ && \
+            docker run -it app:build pytest -m dist --env=local
+
 workflows:
   version: 2
   main:
     jobs:
       - lint
       - build_container
+      - integration_test
