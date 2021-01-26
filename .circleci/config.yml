@@ -25,21 +25,26 @@ jobs:
       - checkout
 
       - run:
-          name: Build test container image
-          command: docker build -t app:build .
+          name: Run local Autograh
+          command: docker run --rm --name autograph-server mozilla/autograph
 
       - run:
-          name: Run local server
+          name: Run local Kinto
           command: |
             mkdir --mode=777 attachments && \
             docker run --name kinto.local \
                        --detach \
-                       -v `pwd`/server.ini:/etc/kinto.ini \
+                       -v `pwd`/settings.ini:/etc/kinto.ini \
                        -v `pwd`/attachments:/tmp/attachments \
                        -e KINTO_INI=/etc/kinto.ini \
                        -p 8888:8888 \
+                       --link autograph-server:autograph-server \
                        mozilla/kinto-dist && \
             curl --retry 10 --retry-delay 1 --retry-connrefused http://0.0.0.0:8888/v1/
+
+      - run:
+          name: Build test container image
+          command: docker build -t app:build .
 
       - run:
           name: Test against local server
