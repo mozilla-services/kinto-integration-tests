@@ -42,5 +42,5 @@ $ docker build -t kinto-tests .
 
 Then, you can run the tests like so (substituting your TEST_TYPE and TEST_ENV):
 ```shell
-$ docker run -it kinto-tests pytest -m TEST_TYPE --env=TEST_ENV
+$ docker run --env TEST_TYPE=dist --env TEST_ENV=local -it kinto-tests
 ```

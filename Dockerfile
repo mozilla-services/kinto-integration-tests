@@ -4,6 +4,6 @@ WORKDIR /app
 RUN pip install --progress-bar=off -U pip && \
     pip install poetry
 COPY pyproject.toml poetry.lock /app/
-RUN poetry install --no-interaction --verbose
+RUN poetry install --no-dev --no-interaction --verbose
 COPY . /app
-CMD pytest -m $TEST_TYPE --env=$TEST_ENV
+CMD poetry run pytest -m $TEST_TYPE --env=$TEST_ENV

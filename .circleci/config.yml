@@ -18,8 +18,40 @@ jobs:
           name: Lint
           command: poetry run flake8
 
+  integration_test:
+    machine:
+      image: ubuntu-2004:202010-01
+    steps:
+      - checkout
+
+      - run:
+          name: Build test container image
+          command: docker build -t app:build .
+
+      - run:
+          name: Run local server
+          command: |
+            mkdir --mode=777 attachments && \
+            docker run --name kinto.local \
+                       --detach \
+                       -v `pwd`/server.ini:/etc/kinto.ini \
+                       -v `pwd`/attachments:/tmp/attachments \
+                       -e KINTO_INI=/etc/kinto.ini \
+                       -p 8888:8888 \
+                       mozilla/kinto-dist && \
+            curl --retry 10 --retry-delay 1 --retry-connrefused http://0.0.0.0:8888/v1/
+
+      - run:
+          name: Test against local server
+          command: |
+            docker run --link kinto.local:kinto.local \
+                       --env TEST_TYPE=dist \
+                       --env TEST_ENV=local \
+                       app:build
+
 workflows:
   version: 2
   main:
     jobs:
       - lint
+      - integration_test
