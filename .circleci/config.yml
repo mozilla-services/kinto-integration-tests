@@ -32,7 +32,8 @@ jobs:
           name: Run local server
           command: |
             mkdir --mode=777 attachments && \
-            docker run --detach \
+            docker run --name kinto.local \
+                       --detach \
                        -v `pwd`/server.ini:/etc/kinto.ini \
                        -v `pwd`/attachments:/tmp/attachments \
                        -e KINTO_INI=/etc/kinto.ini \
@@ -42,7 +43,11 @@ jobs:
 
       - run:
           name: Test against local server
-          command: docker run --env TEST_TYPE=dist --env TEST_ENV=local app:build
+          command: |
+            docker run --link kinto.local:kinto.local \
+                       --env TEST_TYPE=dist \
+                       --env TEST_ENV=local \
+                       app:build
 
 workflows:
   version: 2
