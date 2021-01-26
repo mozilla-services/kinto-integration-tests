@@ -42,7 +42,7 @@ jobs:
 
       - run:
           name: Test against local server
-          command: docker run -it app:build pytest -m dist --env=local
+          command: docker run --env TEST_TYPE=dist --env TEST_ENV=local app:build
 
 workflows:
   version: 2
